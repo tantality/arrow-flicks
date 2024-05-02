@@ -1,6 +1,7 @@
 import { FC, ReactNode } from "react";
 import { MantineProvider } from "@mantine/core";
-import { theme, resolver } from "../config/theme";
+import { theme } from "../config/theme";
+import { resolver } from "../config/css-variables-resolver";
 
 interface ThemeProviderProps {
   children: ReactNode;
