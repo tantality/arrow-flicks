@@ -1,0 +1,17 @@
+.filledButton {
+  --button-height-md: 40px;
+  --button-padding-x-md: 20px !important;
+  --button-height-sm: 32px;
+  --button-padding-x-sm: 20px !important;
+  --button-bg: var(--filled-btn-bg-color) !important;
+  --button-color: var(--filled-btn-text-color) !important;
+  --button-hover: var(--hover-filled-btn-bg-color) !important;
+
+  transition: 0.15s ease;
+  font: var(--text-base-s-semibold-font);
+  border: none;
+
+  &:active {
+    background-color: var(--active-filled-btn-bg-color);
+  }
+}
