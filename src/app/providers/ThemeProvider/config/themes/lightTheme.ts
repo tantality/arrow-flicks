@@ -110,6 +110,9 @@ export const lightThemeColors  = {
     pressed: {
       color: LightThemeColors.Purple_500,
     },
+    disabled: {
+      color: LightThemeColors.Grey_300,
+    },
   },
   icon: {
     color: LightThemeColors.Grey_500,

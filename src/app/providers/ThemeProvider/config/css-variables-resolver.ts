@@ -61,14 +61,14 @@ export const resolver: CSSVariablesResolver = (theme) => ({
       theme.other.lightThemeColors.pagination.btn.pressed.text,
 
     //buttons
-      //filled
+    //filled
     "--filled-btn-text-color": theme.other.lightThemeColors.btn.filled.text,
     "--filled-btn-bg-color": theme.other.lightThemeColors.btn.filled.bg,
     "--hover-filled-btn-bg-color":
       theme.other.lightThemeColors.btn.filled.hover.bg,
     "--active-filled-btn-bg-color":
       theme.other.lightThemeColors.btn.filled.pressed.bg,
-      //text
+    //text
     "--text-btn-text-color": theme.other.lightThemeColors.btn.text.text,
     "--disabled-text-btn-text-color":
       theme.other.lightThemeColors.btn.text.disabled.text,
@@ -99,6 +99,8 @@ export const resolver: CSSVariablesResolver = (theme) => ({
 
     //icon buttons
     "--icon-btn-color": theme.other.lightThemeColors.iconBtn.color,
+    "--disabled-icon-btn-color":
+      theme.other.lightThemeColors.iconBtn.disabled.color,
     "--hover-icon-btn-color": theme.other.lightThemeColors.iconBtn.hover.color,
     "--active-icon-btn-color":
       theme.other.lightThemeColors.iconBtn.pressed.color,

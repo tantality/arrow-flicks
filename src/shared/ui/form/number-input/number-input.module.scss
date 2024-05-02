@@ -1,0 +1,87 @@
+.numberInput {
+  :global(.mantine-NumberInput-wrapper) {
+    &:hover {
+      :global(.mantine-NumberInput-input) {
+        border-color: var(--hover-input-border-color);
+      }
+    }
+
+    &:focus {
+      :global(.mantine-NumberInput-input) {
+        border-color: var(--focus-input-border-color);
+      }
+    }
+  }
+
+  :global(.mantine-NumberInput-input) {
+    padding-left: 12px;
+    font: var(--text-base-s-regular-font);
+    border-color: var(--form-item-border-color);
+    background-color: var(--form-item-bg-color);
+    caret-color: var(--input-caret-color);
+
+    &:focus {
+      border-color: var(--focus-input-border-color);
+    }
+
+    &::placeholder {
+      color: var(--form-item-placeholder-color);
+    }
+  }
+
+  :global(.mantine-NumberInput-rightSection) {
+    right: 4px;
+  }
+
+  :global(.mantine-NumberInput-controls) {
+    padding-right: 8px;
+  }
+
+  :global(.mantine-NumberInput-control) {
+    border: none;
+
+    svg {
+      color: var(--icon-btn-color);
+      stroke: var(--icon-btn-color);
+      width: 12px !important;
+      height: 12px !important;
+      stroke-width: 0.8px;
+    }
+
+    &:hover {
+      background-color: transparent;
+
+      svg {
+        color: var(--hover-icon-btn-color);
+        stroke: var(--hover-icon-btn-color);
+      }
+    }
+
+    &:active {
+      background-color: transparent;
+
+      svg {
+        color: var(--active-icon-btn-color);
+        stroke: var(--active-icon-btn-color);
+      }
+    }
+
+    &:disabled {
+      cursor: auto;
+
+      svg {
+        stroke-width: 0.8px;
+        color: var(--disabled-icon-btn-color);
+        stroke: var(--disabled-icon-btn-color);
+      }
+    }
+  }
+
+  :global(.mantine-NumberInput-control:where(:first-of-type)) {
+    align-items: flex-end;
+  }
+
+  :global(.mantine-NumberInput-control:where(:last-of-type)) {
+    align-items: flex-start;
+  }
+}
