@@ -1,8 +1,26 @@
 import { CSSVariablesResolver } from "@mantine/core";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
+const defaultFontFamily = inter.style.fontFamily;
 
 export const resolver: CSSVariablesResolver = (theme) => ({
   variables: {
-    "--mantine-hero-height": theme.other.heroHeight,
+    //title l
+    "--title-size-l": "28px",
+    "--title-l-bold-font": `700 28px/normal ${defaultFontFamily}`,
+    //title s
+    "--title-size-s": "20px",
+    "--title-s-bold-font": `700 20px/20px ${defaultFontFamily}`,
+    "--title-s-semibold-font": `600 20px/normal ${defaultFontFamily}`,
+    //text base m
+    "--text-base-size-m": "16px",
+    "--text-base-m-bold-font": `700 16px/140% ${defaultFontFamily}`,
+    "--text-base-m-regular-font": `400 16px/140% ${defaultFontFamily}`,
+    //text base s
+    "--text-base-size-s": "14px",
+    "--text-base-s-semibold-font": `600 14px/140% ${defaultFontFamily}`,
+    "--text-base-s-regular-font": `400 14px/20px ${defaultFontFamily}`,
   },
   light: {
     "--app-bg-color": theme.other.lightThemeColors.appBg,
