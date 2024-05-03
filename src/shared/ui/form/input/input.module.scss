@@ -1,0 +1,32 @@
+.input {
+  :global(.mantine-TextInput-wrapper) {
+    &:hover {
+      :global(.mantine-TextInput-input) {
+        border-color: var(--hover-input-border-color);
+      }
+    }
+
+    &:focus {
+      :global(.mantine-TextInput-input) {
+        border-color: var(--focus-input-border-color);
+      }
+    }
+  }
+
+  :global(.mantine-TextInput-input) {
+    --input-height: 48px;
+
+    font: var(--text-base-s-regular-font);
+    border-color: var(--form-item-border-color);
+    background-color: var(--form-item-bg-color);
+    caret-color: var(--input-caret-color);
+
+    &:focus {
+      border-color: var(--focus-input-border-color);
+    }
+
+    &::placeholder {
+      color: var(--form-item-placeholder-color);
+    }
+  }
+}
