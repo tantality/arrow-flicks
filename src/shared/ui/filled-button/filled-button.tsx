@@ -1,6 +1,6 @@
 import { classNames } from "../../lib/classNames/classNames";
 import cls from "./filled-button.module.scss";
-import { ButtonHTMLAttributes, ReactNode, memo } from "react";
+import { ButtonHTMLAttributes, ReactNode, forwardRef } from "react";
 import { Button } from "@mantine/core";
 
 export enum FilledButtonSize {
@@ -14,16 +14,26 @@ interface FilledButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
 }
 
-export const FilledButton = memo((props: FilledButtonProps) => {
-  const { className, size = FilledButtonSize.M, ...otherProps } = props;
+export const FilledButton = forwardRef<HTMLButtonElement, FilledButtonProps>(
+  (props, ref) => {
+    const {
+      className,
+      size = FilledButtonSize.M,
+      children,
+      ...otherProps
+    } = props;
 
-  return (
-    <Button
-      type="button"
-      variant="filled"
-      size={size}
-      className={classNames(cls.filledButton, {}, [className])}
-      {...otherProps}
-    />
-  );
-});
+    return (
+      <Button
+        ref={ref}
+        type="button"
+        variant="filled"
+        size={size}
+        className={classNames(cls.filledButton, {}, [className])}
+        {...otherProps}
+      >
+        {children}
+      </Button>
+    );
+  }
+);
