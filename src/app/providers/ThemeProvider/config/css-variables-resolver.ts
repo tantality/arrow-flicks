@@ -21,6 +21,8 @@ export const resolver: CSSVariablesResolver = (theme) => ({
     "--text-base-size-s": "14px",
     "--text-base-s-semibold-font": `600 14px/140% ${defaultFontFamily}`,
     "--text-base-s-regular-font": `400 14px/20px ${defaultFontFamily}`,
+    //sidebar
+    "--sidebar-width": "280px"
   },
   light: {
     "--app-bg-color": theme.other.lightThemeColors.appBg,
@@ -126,7 +128,7 @@ export const resolver: CSSVariablesResolver = (theme) => ({
     "--active-rating-star-color":
       theme.other.lightThemeColors.ratingStar.pressed.color,
 
-    //rating stars
+    //star btn stars
     "--star-btn-icon-color": theme.other.lightThemeColors.starBtn.icon,
     "--active-star-btn-icon-color":
       theme.other.lightThemeColors.starBtn.pressed.icon,
