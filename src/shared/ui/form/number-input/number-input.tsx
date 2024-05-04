@@ -15,6 +15,7 @@ type PickedMantineNumberInputProps = Pick<
   | "defaultValue"
   | "onChange"
   | "style"
+  | "id"
 >;
 
 interface NumberInputProps extends PickedMantineNumberInputProps {

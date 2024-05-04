@@ -1,0 +1,11 @@
+.inputWrapper {
+  :global(.mantine-InputWrapper-root) {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+  }
+
+  :global(.mantine-InputWrapper-label) {
+    font: var(--text-base-m-bold-font);
+  }
+}
