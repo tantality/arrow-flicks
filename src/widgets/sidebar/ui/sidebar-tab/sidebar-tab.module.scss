@@ -1,0 +1,20 @@
+.sidebarTab {
+  :global(.mantine-Tabs-tab) {
+    font: var(--text-base-m-regular-font);
+    background-color: var(--tab-bg-color);
+    color: var(--accent-base-text-color);
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+
+    &:hover {
+      color: var(--hover-tab-text-color);
+    }
+
+    &[data-active][data-active] {
+      font: var(--text-base-m-bold-font);
+      background-color: var(--active-tab-bg-color);
+      color: var(--active-tab-text-color);
+    }
+  }
+}
