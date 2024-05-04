@@ -1,0 +1,40 @@
+.dropdown {
+  font: var(--text-base-s-regular-font);
+
+  :global(.mantine-Select-wrapper) {
+    --input-height: 42px;
+    --input-padding-inline-start:12px;
+
+    border-color: var(--form-item-border-color);
+    transition: 0.15s ease;
+
+    &:has([data-expanded="true"]) {
+      svg {
+        transform: scaleY(-1);
+        filter: brightness(0) saturate(100%) invert(34%) sepia(64%)
+          saturate(2691%) hue-rotate(245deg) brightness(100%) contrast(94%);
+        color: var(--hover-input-border-color);
+      }
+    }
+
+    &:hover,
+    &:active {
+      :global(.mantine-Select-input) {
+        border-color: var(--hover-input-border-color);
+      }
+    }
+  }
+
+  :global(.mantine-Select-input) {
+    --input-height: 42px;
+    --input-bd-focus: var(--form-item-border-color);
+
+    &::placeholder {
+      color: var(--form-item-placeholder-color);
+    }
+
+    &[data-expanded="true"] {
+      border-color: var(--hover-input-border-color);
+    }
+  }
+}

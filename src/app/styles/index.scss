@@ -3,3 +3,35 @@
 body {
   background-color: var(--app-bg-color);
 }
+
+@media (hover: hover) {
+  .mantine-Select-option {
+    &:hover {
+      &:where(:not([data-combobox-selected], [data-combobox-disabled])) {
+        background-color: var(--hover-shell-bg-color);
+
+        span {
+          color: var(--hover-shell-text-color);
+        }
+      }
+    }
+  }
+}
+
+.mantine-ScrollArea-viewport{
+  padding-right: 0;
+}
+
+.mantine-Select-option {
+  padding: 8px;
+  font: var(--text-base-s-regular-font);
+  
+  &[aria-selected="true"] {
+    padding-left: 10px;
+    background-color: var(--active-shell-bg-color);
+
+    span {
+      color: var(--active-shell-text-color);
+    }
+  }
+}

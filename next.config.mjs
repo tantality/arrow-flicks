@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  
+  sassOptions: {
+    prependData: `@import "./src/app/styles/_mantine.scss";`,
+  },
   reactStrictMode: true,
   async redirects() {
     return [
