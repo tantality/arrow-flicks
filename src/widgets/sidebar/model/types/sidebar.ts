@@ -11,8 +11,3 @@ export interface SidebarTabItem {
   label: string;
   value: string;
 }
-
-// const tabItem: SidebarTabItem[] = [
-//   { label: "Movies", path: SidebarRoutes.MOVIES },
-//   { label: "Rated movies", path: SidebarRoutes.RATED_MOVIES },
-// ];
