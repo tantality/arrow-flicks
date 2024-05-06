@@ -1,0 +1,17 @@
+.movieCardDescriptionList {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.75rem 1.25rem;
+    align-items: center;
+
+  .itemName {
+    font-size: 1rem;
+    color: var(--secondary-base-text-color);
+  }
+
+  .itemValue {
+    font-size: 1rem;
+    color: var(--accent-base-text-color);
+    line-height: 1.25rem;
+  }
+}
