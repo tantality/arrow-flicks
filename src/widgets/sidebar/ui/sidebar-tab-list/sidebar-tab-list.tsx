@@ -33,8 +33,8 @@ export const SidebarTabList = memo((props: SidebarTabListProps) => {
     >
       <Tabs value={activeTabValue} variant="pills">
         <Tabs.List grow>
-          {tabItems.map((tab) => (
-            <Link href={tab.value} passHref>
+          {tabItems.map((tab, ind) => (
+            <Link href={tab.value} passHref key={ind}>
               <SidebarTab tab={tab} />
             </Link>
           ))}
