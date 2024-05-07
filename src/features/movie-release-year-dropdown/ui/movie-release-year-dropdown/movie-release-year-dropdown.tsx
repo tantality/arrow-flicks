@@ -17,7 +17,7 @@ export const MovieReleaseYearDropdown = memo(
     return (
       <InputWrapper
         id="release-year-dropdown"
-        label="Release years"
+        label="Release year"
         className={classNames("", {}, [className])}
       >
         <Dropdown
