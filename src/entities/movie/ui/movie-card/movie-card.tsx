@@ -72,8 +72,8 @@ export const MovieCard = memo((props: MovieCardProps) => {
             <NoPosterSImg alt="poster-placeholder" />
           )}
         </div>
-        <Stack justify="space-between">
-          <header className={cls.header}>
+        <Stack className={cls.body} justify="space-between">
+          <Group className={cls.header}>
             <Stack gap={"0.5rem"}>
               <div className={cls.title}>{original_title}</div>
               <div className={cls.releaseYear}>{releaseYear}</div>
@@ -85,7 +85,8 @@ export const MovieCard = memo((props: MovieCardProps) => {
                 <div className={cls.peopleAmount}>{roundedPeopleAmount}</div>
               </Group>
             </Stack>
-          </header>
+            <StarIcon />
+          </Group>
           <MovieCardDescriptionList
             items={movieDescriptionItems}
             cardSize={size}

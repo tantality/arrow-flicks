@@ -1,12 +1,20 @@
+/* stylelint-disable media-feature-range-notation */
 .movieCard {
   font-size: 1rem;
   color: var(--secondary-base-text-color);
 
   .container {
     --group-align: space-between !important;
+
+    .body {
+      flex-grow: 1;
+    }
   }
 
   .header {
+    --group-align: space-between !important;
+    --group-justify: space-between !important;
+
     .title {
       font: var(--title-s-semibold-font);
       color: var(--accent-title-color);
@@ -41,5 +49,26 @@
 .md {
   .poster {
     height: 170px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .lg {
+    .poster {
+      height: 300px;
+    }
+  }
+}
+
+@media (max-width: 950px) {
+  .lg {
+    .container {
+      --group-justify: center !important;
+    }
+
+    .header {
+      --group-align: space-between !important;
+      --group-justify: space-between !important;
+    }
   }
 }
