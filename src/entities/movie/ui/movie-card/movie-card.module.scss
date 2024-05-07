@@ -3,13 +3,17 @@
   color: var(--secondary-base-text-color);
 
   .container {
-    flex-wrap: nowrap !important;
+    --group-align: space-between !important;
   }
 
   .header {
     .title {
       font: var(--title-s-semibold-font);
       color: var(--accent-title-color);
+    }
+
+    .releaseYear {
+      line-height: 20px;
     }
 
     .averagePeopleRating {

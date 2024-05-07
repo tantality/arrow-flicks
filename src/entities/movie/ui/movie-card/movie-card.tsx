@@ -4,7 +4,8 @@ import { memo } from "react";
 import { Card, CardSize } from "@/shared/ui/card";
 import { Group, Stack } from "@mantine/core";
 import { MovieCardDescriptionList } from "../movie-card-description-list/movie-card-description-list";
-import NoPosterImgL from "@/shared/assets/imgs/no-poster-l.svg";
+import NoPosterLImg from "@/shared/assets/imgs/no-poster-l.svg";
+import NoPosterSImg from "@/shared/assets/imgs/no-poster-s.svg";
 import StarIcon from "@/shared/assets/icons/yellow-star.svg";
 import dayjs from "dayjs";
 import { mapToFormattedMovieDescriptionItems } from "../../../lib/map-to-formatted-movie-description-items";
@@ -63,14 +64,13 @@ export const MovieCard = memo((props: MovieCardProps) => {
       className={classNames(cls.movieCard, {}, [className, cls[size]])}
       size={CardSize.L}
     >
-      <Group
-        gap={"1rem"}
-        className={cls.container}
-        wrap="nowrap"
-        align="space-between"
-      >
+      <Group gap={"1rem"} className={cls.container}>
         <div className={cls.poster}>
-          <NoPosterImgL alt="poster" />
+          {size === MovieCardSize.L ? (
+            <NoPosterLImg alt="poster-placeholder" />
+          ) : (
+            <NoPosterSImg alt="poster-placeholder" />
+          )}
         </div>
         <Stack justify="space-between">
           <header className={cls.header}>
