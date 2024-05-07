@@ -1,1 +1,1 @@
-export * from "./ui/movie-genre-dropdown/movie-genre-dropdown";
+export { MovieGenreDropdown } from "./ui/movie-genre-dropdown/movie-genre-dropdown";

@@ -3,6 +3,7 @@ import cls from "./movie-genre-dropdown.module.scss";
 import { memo } from "react";
 import { InputWrapper } from "@/shared/ui/form/input-wrapper";
 import { Dropdown } from "@/shared/ui/dropdown";
+import { useMovieGenresQuery } from "../../api/use-movie-genres";
 
 interface MovieGenreDropdownProps {
   className?: string;
@@ -11,41 +12,11 @@ interface MovieGenreDropdownProps {
 export const MovieGenreDropdown = memo((props: MovieGenreDropdownProps) => {
   const { className } = props;
 
-  const data = [
-    {
-      label: "всем привет",
-      value: "1",
-    },
-    {
-      label: "всем привет  2",
-      value: "2",
-    },
+  const { data, isLoading, error } = useMovieGenresQuery();
 
-    {
-      label: "всем привет,минчане?",
-      value: "3",
-    },
-    {
-      label: "Thriller",
-      value: "Thriller",
-    },
-    {
-      label: "Fantasy",
-      value: "Fantasy",
-    },
-    {
-      label: "6",
-      value: "6",
-    },
-    {
-      label: "7",
-      value: "7",
-    },
-    {
-      label: "8",
-      value: "8",
-    },
-  ];
+  if (error) {
+    return null;
+  }
 
   return (
     <InputWrapper
@@ -53,7 +24,7 @@ export const MovieGenreDropdown = memo((props: MovieGenreDropdownProps) => {
       label="Genres"
       className={classNames(cls.movieGenreDropdown, {}, [className])}
     >
-      <Dropdown placeholder="Select genre" data={data} />
+      <Dropdown placeholder="Select genre" data={data} disabled={isLoading} />
     </InputWrapper>
   );
 });
