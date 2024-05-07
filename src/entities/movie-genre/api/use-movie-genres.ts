@@ -1,18 +1,26 @@
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
-import { MovieGenreDto } from "../model/types/movie-genre";
+import { MovieGenresDto } from "../model/types/movie-genre";
 import { axiosInstance } from "@/shared/api/axios";
+import { DropdownOption } from "@/shared/types/dropdown-option.type";
+import { mapMovieGenresToDropdownOptions } from "../lib/map-movie-genres-to-dropdown-options";
 
-const getMovieGenres = async (): Promise<MovieGenreDto[]> => {
-  const res = await axiosInstance.get<MovieGenreDto[]>("genre/movie/list?language=en");
+const getMovieGenres = async (): Promise<MovieGenresDto> => {
+  const res = await axiosInstance.get<MovieGenresDto>(
+    "genre/movie/list?language=en"
+  );
   return res.data;
 };
 
-export const useMovieGenres = (): UseQueryResult<MovieGenreDto[]> => {
-  const data = useQuery({
+type UseQueryResultType<T> = UseQueryResult<T[], Error>;
+
+export const useMovieGenresQuery = (): UseQueryResultType<DropdownOption> => {
+  const queryRes = useQuery({
     queryKey: ["movie-genres"],
     queryFn: () => getMovieGenres(),
     staleTime: Infinity,
   });
 
-  return data;
+  const movieGenres = mapMovieGenresToDropdownOptions(queryRes.data);
+
+  return { ...queryRes, data: movieGenres } as UseQueryResultType<DropdownOption>;
 };
