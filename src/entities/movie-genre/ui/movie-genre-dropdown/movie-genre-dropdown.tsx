@@ -7,6 +7,8 @@ import { useMovieGenresQuery } from "../../api/use-movie-genres";
 
 interface MovieGenreDropdownProps {
   className?: string;
+  value?: string | null;
+  onChange?: (value: string | null) => void;
 }
 
 export const MovieGenreDropdown = memo((props: MovieGenreDropdownProps) => {
@@ -22,9 +24,14 @@ export const MovieGenreDropdown = memo((props: MovieGenreDropdownProps) => {
     <InputWrapper
       id="genre-dropdown"
       label="Genres"
-      className={classNames(cls.movieGenreDropdown, {}, [className])}
+      className={classNames("", {}, [className])}
     >
-      <Dropdown placeholder="Select genre" data={data} disabled={isLoading} />
+      <Dropdown
+        placeholder="Select genre"
+        data={data}
+        disabled={isLoading}
+        {...props}
+      />
     </InputWrapper>
   );
 });
