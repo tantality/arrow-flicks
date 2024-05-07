@@ -19,9 +19,13 @@
 
     &:hover,
     &:active {
-      :global(.mantine-Select-input) {
+      :global(.mantine-Select-input):where([data-disabled="false"]) {
         border-color: var(--hover-input-border-color);
       }
+    }
+
+    [data-disabled="true"]{
+      cursor: auto;
     }
   }
 
