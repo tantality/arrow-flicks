@@ -1,9 +1,8 @@
 import { classNames } from "@/shared/lib/classNames/classNames";
-import cls from "./movie-genre-dropdown.module.scss";
 import { memo } from "react";
 import { InputWrapper } from "@/shared/ui/form/input-wrapper";
 import { Dropdown } from "@/shared/ui/dropdown";
-import { useMovieGenresQuery } from "../../api/use-movie-genres";
+import { useMovieGenresQuery } from "../../api/use-movie-genres-query";
 
 interface MovieGenreDropdownProps {
   className?: string;
