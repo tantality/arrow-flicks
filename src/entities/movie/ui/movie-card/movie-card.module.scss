@@ -1,0 +1,41 @@
+.movieCard {
+  font-size: 1rem;
+  color: var(--secondary-base-text-color);
+
+  .container {
+    flex-wrap: nowrap !important;
+  }
+
+  .header {
+    .title {
+      font: var(--title-s-semibold-font);
+      color: var(--accent-title-color);
+    }
+
+    .averagePeopleRating {
+      .averageRating {
+        color: var(--accent-base-text-color);
+        font-weight: 600;
+        line-height: 20px;
+      }
+    }
+  }
+
+  .poster {
+    svg {
+      height: 100%;
+    }
+  }
+}
+
+.lg {
+  .poster {
+    height: 352px;
+  }
+}
+
+.md {
+  .poster {
+    height: 170px;
+  }
+}
