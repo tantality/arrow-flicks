@@ -8,8 +8,8 @@ import NoPosterLImg from "@/shared/assets/imgs/no-poster-l.svg";
 import NoPosterSImg from "@/shared/assets/imgs/no-poster-s.svg";
 import StarIcon from "@/shared/assets/icons/yellow-star.svg";
 import dayjs from "dayjs";
-import { mapToFormattedMovieDescriptionItems } from "../../../lib/map-to-formatted-movie-description-items";
-import { roundNumberToLetterAbbreviation } from "../../../lib/round-number-to-letter-abbreviation";
+import { mapToFormattedMovieDescriptionItems } from "../../lib/map-to-formatted-movie-description-items";
+import { roundNumberToLetterAbbreviation } from "../../lib/round-number-to-letter-abbreviation";
 
 export enum MovieCardSize {
   S = "sm",

@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
-import { MovieCardSize } from "../movie/ui/movie-card/movie-card";
-import { MovieCardDescriptionListItem } from "../movie/model/types/movie";
+import { MovieCardSize } from "../ui/movie-card/movie-card";
+import { MovieCardDescriptionListItem } from "../model/types/movie";
 
 interface MovieDetails {
   release_date: string;
