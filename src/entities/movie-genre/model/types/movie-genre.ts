@@ -1,4 +1,4 @@
-export interface GenreDto {
+export interface MovieGenreDto {
   id: number;
   name: string;
 }
