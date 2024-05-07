@@ -3,19 +3,24 @@ import cls from "./movie-card-description-list.module.scss";
 import { memo } from "react";
 import { MovieCardDescriptionListItem } from "../../model/types/movie";
 import React from "react";
+import { MovieCardSize } from "../movie-card/movie-card";
 
 interface MovieCardDescriptionListProps {
   className?: string;
   items: MovieCardDescriptionListItem[];
+  cardSize: MovieCardSize;
 }
 
 export const MovieCardDescriptionList = memo(
   (props: MovieCardDescriptionListProps) => {
-    const { className, items, ...otherProps } = props;
+    const { className, items, cardSize, ...otherProps } = props;
 
     return (
       <div
-        className={classNames(cls.movieCardDescriptionList, {}, [className])}
+        className={classNames(cls.movieCardDescriptionList, {}, [
+          className,
+          cls[cardSize],
+        ])}
         {...otherProps}
       >
         {items.map((item, ind) => (
