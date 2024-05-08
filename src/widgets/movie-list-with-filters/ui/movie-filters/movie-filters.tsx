@@ -1,6 +1,6 @@
 import { classNames } from "@/shared/lib/classNames/classNames";
 import cls from "./movie-filters.module.scss";
-import { memo, useState } from "react";
+import { memo } from "react";
 import { MovieGenreDropdown } from "@/entities/movie-genre";
 import { MovieReleaseYearDropdown } from "@/features/movie-release-year-dropdown";
 import { Group, Stack } from "@mantine/core";
@@ -8,6 +8,7 @@ import { InputWrapper } from "@/shared/ui/form/input-wrapper";
 import { NumberInput } from "@/shared/ui/form/number-input";
 import { TextButton } from "@/shared/ui/text-button";
 import { MovieSortByDropdown } from "@/features/movie-sort-by-dropdown";
+import { useMovieFilters } from "../../hooks/use-movie-filters";
 
 interface MovieFiltersProps {
   className?: string;
@@ -16,11 +17,16 @@ interface MovieFiltersProps {
 export const MovieFilters = memo((props: MovieFiltersProps) => {
   const { className, ...otherProps } = props;
 
-  const [releaseYear, setReleaseYear] = useState<string | null>();
-  const [genre, setGenre] = useState<string | null>();
-  const [sortBy, setSortBy] = useState<string | null>("revenue.asc");
-  const [fromRating, setFromRating] = useState<string | number>();
-  const [toRating, setToRating] = useState<string | number>();
+  const {
+    data,
+    areFiltersEmpty,
+    setGenre,
+    setReleaseYear,
+    setFromRating,
+    setToRating,
+    setSortBy,
+    resetFilters,
+  } = useMovieFilters();
 
   return (
     <Stack gap={"1.5rem"}>
@@ -29,9 +35,9 @@ export const MovieFilters = memo((props: MovieFiltersProps) => {
         style={{ marginTop: "40px" }}
         {...otherProps}
       >
-        <MovieGenreDropdown value={genre} onChange={setGenre} />
+        <MovieGenreDropdown value={data.genre} onChange={setGenre} />
         <MovieReleaseYearDropdown
-          value={releaseYear}
+          value={data.releaseYear}
           onChange={setReleaseYear}
         />
         <Stack className={cls.rating} gap={16}>
@@ -42,7 +48,7 @@ export const MovieFilters = memo((props: MovieFiltersProps) => {
                 id="input-demo"
                 min={0}
                 max={10}
-                value={fromRating}
+                value={data.fromRating}
                 onChange={setFromRating}
               />
               <NumberInput
@@ -50,15 +56,17 @@ export const MovieFilters = memo((props: MovieFiltersProps) => {
                 id="input-demo"
                 min={0}
                 max={10}
-                value={toRating}
+                value={data.toRating}
                 onChange={setToRating}
               />
             </Group>
           </InputWrapper>
         </Stack>
-        <TextButton>Reset filters</TextButton>
+        <TextButton onClick={resetFilters} disabled={areFiltersEmpty}>
+          Reset filters
+        </TextButton>
       </Group>
-      <MovieSortByDropdown value={sortBy} onChange={setSortBy} />
+      <MovieSortByDropdown value={data.sortBy} onChange={setSortBy} />
     </Stack>
   );
 });
