@@ -1,2 +1,29 @@
 .movieFilters {
+  .filters {
+    --group-wrap: nowrap;
+
+    .genreDropdown,
+    .releaseYearDropdown {
+      max-width: 284px;
+      flex-grow: 1;
+    }
+
+    .ratingInputs {
+      --group-wrap: nowrap;
+      
+      max-width: max-content;
+
+      .ratingInput{
+        max-width: 138px;
+        flex-grow: 1;
+      }
+    }
+  }
+
+  .sortByDropdown{
+    max-width: 284px;
+    align-self: flex-end;
+    flex-grow: 1;
+    width: 100%;
+  }
 }

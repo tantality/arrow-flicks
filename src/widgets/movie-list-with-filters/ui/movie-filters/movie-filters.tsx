@@ -29,21 +29,31 @@ export const MovieFilters = memo((props: MovieFiltersProps) => {
   } = useMovieFilters();
 
   return (
-    <Stack gap={"1.5rem"}>
+    <Stack
+      gap={"1.5rem"}
+      className={classNames(cls.movieFilters, {}, [className])}
+    >
       <Group
-        className={classNames(cls.movieFilters, {}, [className])}
+        className={classNames(cls.filters)}
         style={{ marginTop: "40px" }}
+        align="flex-end"
         {...otherProps}
       >
-        <MovieGenreDropdown value={data.genre} onChange={setGenreId} />
+        <MovieGenreDropdown
+          className={cls.genreDropdown}
+          value={data.genre}
+          onChange={setGenreId}
+        />
         <MovieReleaseYearDropdown
+          className={cls.releaseYearDropdown}
           value={data.releaseYear}
           onChange={setReleaseYear}
         />
-        <Stack className={cls.rating} gap={16}>
+        <Stack className={cls.ratingInputs} gap={16}>
           <InputWrapper id="rating-inputs" label="Ratings">
             <Group className="rating-inputs" gap={8}>
               <NumberInput
+                className={cls.ratingInput}
                 placeholder="From"
                 id="input-demo"
                 min={0}
@@ -52,6 +62,7 @@ export const MovieFilters = memo((props: MovieFiltersProps) => {
                 onChange={setFromRating}
               />
               <NumberInput
+                className={cls.ratingInput}
                 placeholder="To"
                 id="input-demo"
                 min={0}
@@ -66,7 +77,11 @@ export const MovieFilters = memo((props: MovieFiltersProps) => {
           Reset filters
         </TextButton>
       </Group>
-      <MovieSortByDropdown value={data.sortBy} onChange={setSortBy} />
+      <MovieSortByDropdown
+        className={cls.sortByDropdown}
+        value={data.sortBy}
+        onChange={setSortBy}
+      />
     </Stack>
   );
 });
