@@ -40,7 +40,7 @@ export const MovieFilters = memo((props: MovieFiltersProps) => {
       >
         <MovieGenreDropdown
           className={cls.genreDropdown}
-          value={data.genre}
+          value={data.genreId}
           onChange={setGenreId}
         />
         <MovieReleaseYearDropdown

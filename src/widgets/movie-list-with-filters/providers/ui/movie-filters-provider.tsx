@@ -7,7 +7,7 @@ import { movieFiltersReducer } from "../../model/reducers/movie-filters";
 import { ReactNode, useReducer } from "react";
 
 export const initialData: MovieFiltersState = {
-  genre: undefined,
+  genreId: undefined,
   releaseYear: undefined,
   fromRating: undefined,
   toRating: undefined,

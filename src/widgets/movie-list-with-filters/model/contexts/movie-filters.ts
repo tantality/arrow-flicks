@@ -3,7 +3,7 @@ import {  MovieFiltersActions } from "../types/movie-filters";
 
 export interface MovieFiltersState {
   releaseYear?: string | null;
-  genre?: string | null;
+  genreId?: string | null;
   fromRating?: string | number;
   toRating?: string | number;
   sortBy?: string | null;

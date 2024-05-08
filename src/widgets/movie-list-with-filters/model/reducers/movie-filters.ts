@@ -10,7 +10,7 @@ export function movieFiltersReducer(
 ): MovieFiltersState {
   switch (action.type) {
     case MovieFiltersActionTypes.SetGenreId: {
-      return { ...state, genre: action.payload };
+      return { ...state, genreId: action.payload };
     }
     case MovieFiltersActionTypes.SetReleaseYear: {
       return { ...state, releaseYear: action.payload };
@@ -29,7 +29,7 @@ export function movieFiltersReducer(
         ...state,
         toRating: "",
         fromRating: "",
-        genre: "",
+        genreId: "",
         releaseYear: "",
       };
     }

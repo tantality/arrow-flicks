@@ -28,7 +28,7 @@ export const useMovieFilters = (): UseMovieFiltersType => {
   const filters = useMemo(() => {
     const { sortBy, ...filters } = data;
     return filters;
-  }, [data.genre, data.releaseYear, data.fromRating, data.toRating]);
+  }, [data.genreId, data.releaseYear, data.fromRating, data.toRating]);
 
   const areFiltersEmpty = useMemo(
     () => doesObjContainEmptyProperties(filters),
