@@ -1,0 +1,22 @@
+.textButton {
+  font-size: var(--text-base-size-s);
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--text-btn-text-color);
+  background-color: transparent;
+  padding: 0;
+
+  &:hover {
+    color: var(--hover-text-btn-text-color);
+  }
+
+  &:active {
+    color: var(--active-text-btn-text-color);
+  }
+
+  &[data-disabled="true"] {
+    color: var(--disabled-text-btn-text-color);
+    cursor: auto;
+  }
+}
+
