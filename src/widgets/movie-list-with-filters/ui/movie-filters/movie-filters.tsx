@@ -20,7 +20,7 @@ export const MovieFilters = memo((props: MovieFiltersProps) => {
   const {
     data,
     areFiltersEmpty,
-    setGenre,
+    setGenreId,
     setReleaseYear,
     setFromRating,
     setToRating,
@@ -35,7 +35,7 @@ export const MovieFilters = memo((props: MovieFiltersProps) => {
         style={{ marginTop: "40px" }}
         {...otherProps}
       >
-        <MovieGenreDropdown value={data.genre} onChange={setGenre} />
+        <MovieGenreDropdown value={data.genre} onChange={setGenreId} />
         <MovieReleaseYearDropdown
           value={data.releaseYear}
           onChange={setReleaseYear}

@@ -10,7 +10,7 @@ import { useDebouncedCallback } from "@mantine/hooks";
 
 interface UseMovieFiltersType {
   data: MovieFiltersState;
-  setGenre: (value: string | null) => void;
+  setGenreId: (value: string | null) => void;
   setSortBy: (value: string | null) => void;
   setReleaseYear: (value: string | null) => void;
   setFromRating: (value: string | number) => void;
@@ -35,9 +35,9 @@ export const useMovieFilters = (): UseMovieFiltersType => {
     [filters]
   );
 
-  const setGenre = useCallback(
+  const setGenreId = useCallback(
     (value: string | null) =>
-      dispatch(movieFiltersActions.setGenreAction(value)),
+      dispatch(movieFiltersActions.setGenreIdAction(value)),
     []
   );
 
@@ -79,7 +79,7 @@ export const useMovieFilters = (): UseMovieFiltersType => {
 
   return {
     data,
-    setGenre,
+    setGenreId,
     setSortBy,
     setReleaseYear,
     setFromRating,

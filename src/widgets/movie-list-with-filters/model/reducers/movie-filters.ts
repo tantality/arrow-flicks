@@ -9,7 +9,7 @@ export function movieFiltersReducer(
   action: MovieFiltersActions
 ): MovieFiltersState {
   switch (action.type) {
-    case MovieFiltersActionTypes.SetGenre: {
+    case MovieFiltersActionTypes.SetGenreId: {
       return { ...state, genre: action.payload };
     }
     case MovieFiltersActionTypes.SetReleaseYear: {
