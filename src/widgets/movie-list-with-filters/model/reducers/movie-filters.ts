@@ -29,8 +29,8 @@ export function movieFiltersReducer(
         ...state,
         toRating: "",
         fromRating: "",
-        genreId: "",
-        releaseYear: "",
+        genreId: null,
+        releaseYear: null,
       };
     }
     default: {
