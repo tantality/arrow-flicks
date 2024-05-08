@@ -24,8 +24,8 @@ interface MovieCardProps {
   original_title: string;
   release_date: string;
   poster_path: string;
-  vote_average: number;
-  vote_count: number;
+  vote_average?: number;
+  vote_count?: number;
   genres: string[];
   budget?: number;
   revenue?: number;
@@ -47,11 +47,17 @@ export const MovieCard = memo((props: MovieCardProps) => {
     runtime,
   } = props;
 
-  const releaseYear = dayjs(release_date).get("year");
-  const roundedVoteAverage = vote_average.toFixed(1);
-  const roundedPeopleAmount = `(${roundNumberToLetterAbbreviation(
-    vote_count
-  )})`;
+  const releaseYear = dayjs(release_date).isValid()
+    ? dayjs(release_date).get("year")
+    : null;
+
+  const roundedVoteAverage = !Object.is(vote_average, undefined)
+    ? Number(vote_average).toFixed(1)
+    : null;
+
+  const roundedPeopleAmount = !Object.is(vote_average, undefined)
+    ? `(${roundNumberToLetterAbbreviation(Number(vote_count))})`
+    : null;
 
   const movieDetails = { genres, budget, revenue, runtime, release_date };
   const movieDescriptionItems = mapToFormattedMovieDescriptionItems(
@@ -76,14 +82,20 @@ export const MovieCard = memo((props: MovieCardProps) => {
           <Group className={cls.header}>
             <Stack gap={"0.5rem"}>
               <div className={cls.title}>{original_title}</div>
-              <div className={cls.releaseYear}>{releaseYear}</div>
-              <Group className={cls.averagePeopleRating} gap={"0.5rem"}>
-                <Group gap={"0.25rem"}>
-                  <StarIcon />
-                  <div className={cls.averageRating}>{roundedVoteAverage}</div>
+              {releaseYear && (
+                <div className={cls.releaseYear}>{releaseYear}</div>
+              )}
+              {roundedPeopleAmount && roundedVoteAverage ? (
+                <Group className={cls.averagePeopleRating} gap={"0.5rem"}>
+                  <Group gap={"0.25rem"}>
+                    <StarIcon />
+                    <div className={cls.averageRating}>
+                      {roundedVoteAverage}
+                    </div>
+                  </Group>
+                  <div className={cls.peopleAmount}>{roundedPeopleAmount}</div>
                 </Group>
-                <div className={cls.peopleAmount}>{roundedPeopleAmount}</div>
-              </Group>
+              ) : null}
             </Stack>
             <StarIcon />
           </Group>
