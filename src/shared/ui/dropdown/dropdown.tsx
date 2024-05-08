@@ -6,7 +6,13 @@ import DownArrowIcon from "@/shared/assets/icons/down-arrow-m.svg";
 
 type PickedMantineSelectProps = Pick<
   SelectProps,
-  "placeholder" | "data" | "style" | "disabled" | "value" | "onChange"
+  | "placeholder"
+  | "data"
+  | "style"
+  | "disabled"
+  | "value"
+  | "onChange"
+  | "allowDeselect"
 >;
 
 interface DropdownProps extends PickedMantineSelectProps {
