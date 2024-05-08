@@ -35,7 +35,6 @@ export const MovieFilters = memo((props: MovieFiltersProps) => {
     >
       <Group
         className={classNames(cls.filters)}
-        style={{ marginTop: "40px" }}
         align="flex-end"
         {...otherProps}
       >
