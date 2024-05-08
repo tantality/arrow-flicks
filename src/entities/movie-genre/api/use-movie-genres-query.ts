@@ -14,9 +14,9 @@ const getMovieGenres = async (): Promise<MovieGenresDto> => {
   return res.data;
 };
 
-type UseQueryResultType<T, E = Error> = UseQueryResult<T[], E>;
+type UseQueryResultType<T, E = Error> = UseQueryResult<T, E>;
 
-export const useMovieGenresQuery = (): UseQueryResultType<DropdownOption> => {
+export const useMovieGenresQuery = (): UseQueryResultType<DropdownOption[]> => {
   const queryRes = useQuery({
     queryKey: ["movie-genres"],
     queryFn: () => getMovieGenres(),
@@ -35,5 +35,5 @@ export const useMovieGenresQuery = (): UseQueryResultType<DropdownOption> => {
   return {
     ...queryRes,
     data: movieGenres,
-  } as UseQueryResultType<DropdownOption>;
+  } as UseQueryResultType<DropdownOption[]>;
 };
