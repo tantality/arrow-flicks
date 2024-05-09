@@ -2,8 +2,8 @@
   display: grid;
   grid-template-columns: max-content 1fr;
   gap: 0.75rem 0.5rem;
-  align-items: center;
   line-height: 1.25rem;
+  align-items: flex-start;
 
   .itemName {
     font-size: 1rem;
@@ -18,4 +18,5 @@
 
 .lg {
   grid-template-columns: 140px 1fr;
+  align-items: center;
 }

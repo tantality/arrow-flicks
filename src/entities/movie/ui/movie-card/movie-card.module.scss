@@ -5,6 +5,7 @@
 
   .container {
     --group-align: space-between !important;
+    --group-wrap: nowrap !important;
 
     .body {
       flex-grow: 1;
@@ -14,6 +15,7 @@
   .header {
     --group-align: space-between !important;
     --group-justify: space-between !important;
+    --group-wrap: nowrap !important;
 
     .title {
       font: var(--title-s-semibold-font);

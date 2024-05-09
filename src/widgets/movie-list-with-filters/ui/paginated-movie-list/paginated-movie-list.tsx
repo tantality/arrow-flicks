@@ -1,7 +1,7 @@
 import { classNames } from "@/shared/lib/classNames/classNames";
 import cls from "./paginated-movie-list.module.scss";
 import { memo, useState } from "react";
-import { Stack } from "@mantine/core";
+import { Grid, GridCol, Stack } from "@mantine/core";
 import { useMovieFilters } from "../../hooks/use-movie-filters";
 import { useMoviesQuery } from "../../api/use-movies-query";
 import { MovieCard } from "@/entities/movie";
@@ -36,17 +36,20 @@ export const PaginatedMovieList = memo((props: PaginatedMovieListProps) => {
       className={classNames(cls.paginatedMovieList, {}, [className])}
       {...otherProps}
     >
-      <div className={cls.list}>
+      <Grid className={cls.list} gutter={"1rem"}>
         {data.results.map((movie) => (
-          <MovieCard
-            size={MovieCardSize.M}
-            {...movie}
-            key={movie.id}
-            genres={getMovieGenreValuesByIds(movie.genre_ids, genres)}
-            release_date={movie.release_date as unknown as string}
-          />
+          <GridCol span={6}>
+            <MovieCard
+              className={cls.movieCard}
+              size={MovieCardSize.M}
+              {...movie}
+              key={movie.id}
+              genres={getMovieGenreValuesByIds(movie.genre_ids, genres)}
+              release_date={movie.release_date as unknown as string}
+            />
+          </GridCol>
         ))}
-      </div>
+      </Grid>
       <Pagination
         className={cls.pagination}
         total={data.total_pages}
