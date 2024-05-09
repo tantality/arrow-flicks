@@ -1,0 +1,23 @@
+.rateMovieModal {
+  :global(.mantine-Modal-title) {
+    font: var(--text-base-m-regular-font);
+  }
+
+  :global(.mantine-Modal-body) {
+    padding-top: 1rem;
+  }
+
+  :global(.mantine-Modal-header) {
+    border-bottom: 1px solid var(--block-divider-color);
+  }
+
+  .modalBody {
+    .movieTitle {
+      font: var(--text-base-m-bold-font);
+    }
+
+    .rating {
+      column-gap: 0.5rem;
+    }
+  }
+}

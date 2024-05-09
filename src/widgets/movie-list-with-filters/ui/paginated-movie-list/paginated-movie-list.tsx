@@ -4,7 +4,6 @@ import { memo, useState } from "react";
 import { Grid, GridCol, Stack } from "@mantine/core";
 import { useMovieFilters } from "../../hooks/use-movie-filters";
 import { useMoviesQuery } from "../../api/use-movies-query";
-import { MovieCard } from "@/entities/movie";
 import { MovieCardSize } from "@/entities/movie/ui/movie-card/movie-card";
 import {
   getMovieGenreValuesByIds,
