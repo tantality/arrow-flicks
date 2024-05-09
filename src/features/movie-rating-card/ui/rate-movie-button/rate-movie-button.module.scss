@@ -1,0 +1,23 @@
+.container {
+  --group-wrap: "nowrap" !important;
+
+  .rateMovieButton {
+    background-color: transparent;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+
+  .activeButton {
+    filter: brightness(0) saturate(100%) invert(34%) sepia(32%) saturate(3802%)
+      hue-rotate(245deg) brightness(101%) contrast(93%);
+  }
+
+  .text {
+    font-size: 1rem;
+    line-height: 20px;
+    font-weight: 600;
+    color: var(--accent-base-text-color);
+  }
+}

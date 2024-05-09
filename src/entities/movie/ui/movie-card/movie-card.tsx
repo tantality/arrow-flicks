@@ -1,6 +1,6 @@
 import { classNames } from "@/shared/lib/classNames/classNames";
 import cls from "./movie-card.module.scss";
-import { memo } from "react";
+import { ReactNode, memo } from "react";
 import { Card, CardSize } from "@/shared/ui/card";
 import { Group, Stack } from "@mantine/core";
 import { MovieCardDescriptionList } from "../movie-card-description-list/movie-card-description-list";
@@ -30,6 +30,7 @@ interface MovieCardProps {
   budget?: number;
   revenue?: number;
   runtime?: number;
+  rateMovieButton?: ReactNode;
 }
 
 export const MovieCard = memo((props: MovieCardProps) => {
@@ -45,6 +46,7 @@ export const MovieCard = memo((props: MovieCardProps) => {
     budget,
     revenue,
     runtime,
+    rateMovieButton
   } = props;
 
   const releaseYear = dayjs(release_date).isValid()
@@ -97,7 +99,7 @@ export const MovieCard = memo((props: MovieCardProps) => {
                 </Group>
               ) : null}
             </Stack>
-            <StarIcon />
+            {rateMovieButton}
           </Group>
           <MovieCardDescriptionList
             items={movieDescriptionItems}
