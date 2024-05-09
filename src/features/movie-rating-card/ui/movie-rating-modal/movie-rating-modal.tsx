@@ -1,10 +1,12 @@
 import { classNames } from "@/shared/lib/classNames/classNames";
 import cls from "./movie-rating-modal.module.scss";
-import { memo, useState } from "react";
+import { memo, useCallback, useState } from "react";
 import { Group, Modal, ModalProps, Rating, Stack } from "@mantine/core";
 import { FilledButton } from "@/shared/ui/filled-button";
 import { TextButton } from "@/shared/ui/text-button";
 import { RatedMovie } from "../../types/movie-rating-card";
+import { useRatedMoviesDispatch } from "../../hooks/use-rated-movies-dispatch";
+import { ratedMoviesActions } from "../../model/actions/rated-movies";
 
 interface RateMovieModalProps extends ModalProps {
   className?: string;
@@ -13,8 +15,21 @@ interface RateMovieModalProps extends ModalProps {
 
 export const RateMovieModal = memo((props: RateMovieModalProps) => {
   const { className, onClose, movie, ...otherProps } = props;
+  const dispatch = useRatedMoviesDispatch();
 
   const [currentRating, setCurrentRating] = useState<number>(movie.rating ?? 0);
+
+  const onSaveButtonClick = useCallback(() => {
+    const updatedMovie = { ...movie, rating: currentRating };
+    dispatch(ratedMoviesActions.updateMovieRatingAction(updatedMovie));
+    onClose();
+  }, [dispatch, currentRating, movie, onClose]);
+
+  const onRemoveRatingButtonClick = useCallback(() => {
+    dispatch(ratedMoviesActions.removeMovieRatingAction(movie.id));
+    setCurrentRating(0);
+    onClose();
+  }, [dispatch, movie, onClose]);
 
   return (
     <Modal
@@ -35,8 +50,10 @@ export const RateMovieModal = memo((props: RateMovieModalProps) => {
           onChange={setCurrentRating}
         />
         <Group className={cls.buttons} gap="1rem" align="center">
-          <FilledButton onClick={onClose}>Save</FilledButton>
-          <TextButton>Remove rating</TextButton>
+          <FilledButton onClick={onSaveButtonClick}>Save</FilledButton>
+          <TextButton onClick={onRemoveRatingButtonClick}>
+            Remove rating
+          </TextButton>
         </Group>
       </Stack>
     </Modal>
