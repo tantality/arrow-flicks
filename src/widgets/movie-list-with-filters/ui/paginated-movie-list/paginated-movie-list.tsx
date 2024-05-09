@@ -1,7 +1,7 @@
 import { classNames } from "@/shared/lib/classNames/classNames";
 import cls from "./paginated-movie-list.module.scss";
 import { memo, useState } from "react";
-import { Pagination, Stack } from "@mantine/core";
+import { Stack } from "@mantine/core";
 import { useMovieFilters } from "../../hooks/use-movie-filters";
 import { useMoviesQuery } from "../../api/use-movies-query";
 import { MovieCard } from "@/entities/movie";
@@ -10,6 +10,7 @@ import {
   getMovieGenreValuesByIds,
   useMovieGenres,
 } from "@/entities/movie-genre";
+import { Pagination } from "@/shared/ui/pagination";
 
 interface PaginatedMovieListProps {
   className?: string;

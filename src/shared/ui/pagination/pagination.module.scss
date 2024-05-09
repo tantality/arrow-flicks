@@ -1,0 +1,35 @@
+.pagination {
+  :global(.mantine-Pagination-control) {
+    border-radius: 0.25rem;
+    background-color: var(--pagination-btn-bg-color);
+    border-color: var(--pagination-btn-border-color);
+
+    svg {
+      color: var(--pagination-btn-icon-color);
+    }
+
+    &:where([data-disabled="true"]) {
+      cursor: auto;
+      background-color: var(--pagination-btn-bg-color);
+      border-color: var(--disabled-pagination-btn-border-color);
+
+      svg {
+        color: var(--disabled-pagination-btn-icon-color);
+      }
+    }
+
+    &:where([data-active="true"]) {
+      cursor: auto;
+      background-color: var(--active-pagination-btn-bg-color);
+      border-color: var(--active-pagination-btn-border-color);
+      color: var(--active-pagination-btn-text-color);
+    }
+
+    &:hover:where(:not([data-active="true"])):where(
+        :not([data-disabled="true"])
+      ) {
+      background-color: #f2ebf9;
+      border-color: #f2ebf9;
+    }
+  }
+}
