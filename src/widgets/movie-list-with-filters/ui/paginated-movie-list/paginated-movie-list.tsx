@@ -11,6 +11,7 @@ import {
   useMovieGenres,
 } from "@/entities/movie-genre";
 import { Pagination } from "@/shared/ui/pagination";
+import { MovieRatingCard } from "@/features/movie-rating-card";
 
 interface PaginatedMovieListProps {
   className?: string;
@@ -39,7 +40,7 @@ export const PaginatedMovieList = memo((props: PaginatedMovieListProps) => {
       <Grid className={cls.list} gutter={"1rem"}>
         {data.results.map((movie) => (
           <GridCol span={6}>
-            <MovieCard
+            <MovieRatingCard
               className={cls.movieCard}
               size={MovieCardSize.M}
               {...movie}
