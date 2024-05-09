@@ -6,6 +6,7 @@ import { MovieCardSize } from "@/entities/movie/ui/movie-card/movie-card";
 import { RateMovieButton } from "../rate-movie-button/rate-movie-button";
 import { RateMovieModal } from "../movie-rating-modal/movie-rating-modal";
 import { RatedMovie } from "../../types/movie-rating-card";
+import { useMovieRating } from "../../hooks/use-movie-rating";
 
 interface MovieRatingCardProps {
   className?: string;
@@ -26,6 +27,8 @@ export const MovieRatingCard = memo((props: MovieRatingCardProps) => {
   const { className, size, ...movie } = props;
   const [isModalOpened, setIsModalOpened] = useState(false);
 
+  const movieRating = useMovieRating(movie.id);
+
   const handleRateMovieButtonClick = useCallback(
     (value: boolean) => (e: MouseEvent<HTMLButtonElement>) =>
       setIsModalOpened(value),
@@ -37,7 +40,7 @@ export const MovieRatingCard = memo((props: MovieRatingCardProps) => {
     [setIsModalOpened]
   );
 
-  const ratedMovie: RatedMovie = { ...movie };
+  const ratedMovie: RatedMovie = { ...movie, rating: movieRating };
 
   return (
     <>
@@ -46,6 +49,7 @@ export const MovieRatingCard = memo((props: MovieRatingCardProps) => {
         className={classNames(cls.movieRatingCard, {}, [className])}
         rateMovieButton={
           <RateMovieButton
+            rating={movieRating}
             className={cls.cardButton}
             onClick={handleRateMovieButtonClick(true)}
           />
