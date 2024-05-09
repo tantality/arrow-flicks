@@ -1,3 +1,6 @@
+import { RemoveMovieRating } from "../model/actions/rated-movies/remove-movie-rating";
+import { UpdateMovieRating } from "../model/actions/rated-movies/update-movie-rating";
+
 export interface RatedMovie {
   id: number;
   original_title: string;
@@ -12,3 +15,10 @@ export interface RatedMovie {
 
   rating?: number;
 }
+
+export enum RatedMoviesActionTypes {
+  UpdateMovieRating = "update-movie-rating",
+  RemoveMovieRating = "remove-movie-rating",
+}
+
+export type RatedMoviesActions = UpdateMovieRating | RemoveMovieRating;
