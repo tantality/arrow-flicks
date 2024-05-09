@@ -26,7 +26,7 @@ interface MovieCardProps {
   poster_path: string;
   vote_average?: number;
   vote_count?: number;
-  genres: string[];
+  genres?: string[];
   budget?: number;
   revenue?: number;
   runtime?: number;

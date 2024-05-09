@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { MovieFiltersProvider } from "./movie-filters-provider";
+import { MovieGenreProvider } from "@/entities/movie-genre";
 
 interface MovieListWithFiltersProviderProps {
   children: ReactNode;
@@ -8,5 +9,9 @@ interface MovieListWithFiltersProviderProps {
 export function MovieListWithFiltersProvider({
   children,
 }: MovieListWithFiltersProviderProps) {
-  return <MovieFiltersProvider>{children}</MovieFiltersProvider>;
+  return (
+    <MovieGenreProvider>
+      <MovieFiltersProvider>{children}</MovieFiltersProvider>
+    </MovieGenreProvider>
+  );
 }

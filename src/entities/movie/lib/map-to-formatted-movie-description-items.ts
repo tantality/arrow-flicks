@@ -1,10 +1,11 @@
 import dayjs from "dayjs";
 import { MovieCardSize } from "../ui/movie-card/movie-card";
 import { MovieCardDescriptionListItem } from "../model/types/movie";
+import { isValueDefined } from "@/shared/lib/is-value-defined";
 
 interface MovieDetails {
   release_date: string;
-  genres: string[];
+  genres?: string[];
   revenue?: number;
   runtime?: number;
   budget?: number;
@@ -15,7 +16,6 @@ function mapToFormattedMovieDescriptionItems(
   movieDetails: MovieDetails
 ) {
   const { release_date, revenue, runtime, budget, genres } = movieDetails;
-  const joinedGenres = genres.join(", ");
 
   if (cardSize === MovieCardSize.L) {
     return [
@@ -35,19 +35,19 @@ function mapToFormattedMovieDescriptionItems(
         name: "Gross worldwide",
         value: translateNumberIntoThousandsOfDollars(revenue),
       },
-      {
+      genres && {
         name: "Genres",
-        value: joinedGenres,
+        value: genres.join(", "),
       },
     ].filter((item) => Boolean(item)) as MovieCardDescriptionListItem[];
   }
 
   return [
-    {
+    isValueDefined(genres) && {
       name: "Genres",
-      value: joinedGenres,
+      value: genres!.join(", "),
     },
-  ];
+  ].filter((item) => Boolean(item)) as MovieCardDescriptionListItem[];
 }
 
 function toHoursAndMinutes(totalMinutes: number): string {

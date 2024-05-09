@@ -6,6 +6,10 @@ import { useMovieFilters } from "../../hooks/use-movie-filters";
 import { useMoviesQuery } from "../../api/use-movies-query";
 import { MovieCard } from "@/entities/movie";
 import { MovieCardSize } from "@/entities/movie/ui/movie-card/movie-card";
+import {
+  getMovieGenreValuesByIds,
+  useMovieGenres,
+} from "@/entities/movie-genre";
 
 interface PaginatedMovieListProps {
   className?: string;
@@ -18,6 +22,8 @@ export const PaginatedMovieList = memo((props: PaginatedMovieListProps) => {
   const { data: filters } = useMovieFilters();
 
   const { data } = useMoviesQuery(filters, page);
+
+  const genres = useMovieGenres();
 
   if (!data) {
     return "";
@@ -35,7 +41,7 @@ export const PaginatedMovieList = memo((props: PaginatedMovieListProps) => {
             size={MovieCardSize.M}
             {...movie}
             key={movie.id}
-            genres={[]}
+            genres={getMovieGenreValuesByIds(movie.genre_ids, genres)}
             release_date={movie.release_date as unknown as string}
           />
         ))}

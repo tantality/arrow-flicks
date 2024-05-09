@@ -1,4 +1,4 @@
-import { SetGenres, setGenresAction } from "../actions/movie-genres/set-genres";
+import { SetGenres } from "../actions/movie-genres/set-genres";
 
 export interface MovieGenreDto{
   id: number;
