@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { MovieFiltersProvider } from "./movie-filters-provider";
 import { MovieGenreProvider } from "@/entities/movie-genre";
+import { RatedMoviesProvider } from "@/features/movie-rating-card";
 
 interface MovieListWithFiltersProviderProps {
   children: ReactNode;
@@ -11,7 +12,9 @@ export function MovieListWithFiltersProvider({
 }: MovieListWithFiltersProviderProps) {
   return (
     <MovieGenreProvider>
-      <MovieFiltersProvider>{children}</MovieFiltersProvider>
+      <RatedMoviesProvider>
+        <MovieFiltersProvider>{children}</MovieFiltersProvider>
+      </RatedMoviesProvider>
     </MovieGenreProvider>
   );
 }

@@ -38,7 +38,7 @@ export const PaginatedMovieList = memo((props: PaginatedMovieListProps) => {
     >
       <Grid className={cls.list} gutter={"1rem"}>
         {data.results.map((movie) => (
-          <GridCol span={6}>
+          <GridCol span={6} key={movie.id}>
             <MovieRatingCard
               className={cls.movieCard}
               size={MovieCardSize.M}
