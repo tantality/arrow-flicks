@@ -3,14 +3,16 @@ import { axiosInstance } from "@/shared/api/axios";
 import { MovieFiltersState } from "../model/contexts/movie-filters";
 import { MoviesDto, MoviesQueryParams } from "../model/types/movies";
 import { mapFiltersToMoviesQueryParams } from "../lib/map-filters-to-movies-query-params";
+import { usePaginationPage } from "@/app/providers/PaginationPageProvider";
 
 type UseQueryResultType<T, E = Error> = UseQueryResult<T, E>;
 
 export const useMoviesQuery = (
-  filters: MovieFiltersState,
-  page: number
+  filters: MovieFiltersState
 ): UseQueryResultType<MoviesDto> => {
   const { sortBy, releaseYear, toRating, fromRating, genreId } = filters;
+
+  const { page } = usePaginationPage();
 
   const queryParams = mapFiltersToMoviesQueryParams(filters, page);
   const queryRes = useQuery({

@@ -12,6 +12,7 @@ import {
 import { Pagination } from "@/shared/ui/pagination";
 import { MovieRatingCard } from "@/features/movie-rating-card";
 import { MAX_PAGE_AMOUNT } from "@/shared/const/api";
+import { usePaginationPage } from "@/app/providers/PaginationPageProvider";
 
 interface PaginatedMovieListProps {
   className?: string;
@@ -19,10 +20,10 @@ interface PaginatedMovieListProps {
 
 export const PaginatedMovieList = memo((props: PaginatedMovieListProps) => {
   const { className, ...otherProps } = props;
-  const [page, setPage] = useState<number>(1);
 
+  const { page, setPage } = usePaginationPage();
   const { data: filters } = useMovieFilters();
-  const { data } = useMoviesQuery(filters, page);
+  const { data } = useMoviesQuery(filters);
   const genres = useMovieGenres();
 
   if (!data) {
@@ -48,7 +49,6 @@ export const PaginatedMovieList = memo((props: PaginatedMovieListProps) => {
               {...movie}
               key={movie.id}
               genres={getMovieGenreValuesByIds(movie.genre_ids, genres)}
-              release_date={movie.release_date}
             />
           </GridCol>
         ))}

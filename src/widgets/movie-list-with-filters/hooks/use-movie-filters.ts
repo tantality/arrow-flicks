@@ -7,6 +7,7 @@ import { useMovieFiltersDispatch } from "./use-movie-filters-dispatch";
 import { movieFiltersActions } from "../model/actions/movie-filters";
 import { doesObjContainEmptyProperties } from "../lib/does-obj-contain-empty-properties";
 import { useDebouncedCallback } from "@mantine/hooks";
+import { usePaginationPage } from "@/app/providers/PaginationPageProvider";
 
 interface UseMovieFiltersType {
   data: MovieFiltersState;
@@ -24,6 +25,7 @@ const delay = 1000;
 export const useMovieFilters = (): UseMovieFiltersType => {
   const data = useContext(MovieFiltersContext) as MovieFiltersState;
   const dispatch = useMovieFiltersDispatch();
+  const { setPage } = usePaginationPage();
 
   const filters = useMemo(() => {
     const { sortBy, ...filters } = data;
@@ -35,45 +37,42 @@ export const useMovieFilters = (): UseMovieFiltersType => {
     [filters]
   );
 
-  const setGenreId = useCallback(
-    (value: string | null) =>
-      dispatch(movieFiltersActions.setGenreIdAction(value)),
-    []
-  );
+  const setGenreId = useCallback((value: string | null) => {
+    dispatch(movieFiltersActions.setGenreIdAction(value));
+    setPage(1);
+  }, []);
 
-  const setSortBy = useCallback(
-    (value: string | null) =>
-      dispatch(movieFiltersActions.setSortByAction(value)),
-    []
-  );
+  const setSortBy = useCallback((value: string | null) => {
+    dispatch(movieFiltersActions.setSortByAction(value));
+    setPage(1);
+  }, []);
 
   const setReleaseYear = useDebouncedCallback(
-    useCallback(
-      (value: string | null) =>
-        dispatch(movieFiltersActions.setReleaseYearAction(value)),
-      []
-    ),
+    useCallback((value: string | null) => {
+      dispatch(movieFiltersActions.setReleaseYearAction(value));
+      setPage(1);
+    }, []),
     delay
   );
 
   const setFromRating = useDebouncedCallback(
-    useCallback(
-      (value: string | number) =>
-        dispatch(movieFiltersActions.setFromRatingAction(value)),
-      []
-    ),
+    useCallback((value: string | number) => {
+      dispatch(movieFiltersActions.setFromRatingAction(value));
+      setPage(1);
+    }, []),
     delay
   );
 
-  const setToRating = useCallback(
-    (value: string | number) =>
-      dispatch(movieFiltersActions.setToRatingAction(value)),
-    []
-  );
+  const setToRating = useCallback((value: string | number) => {
+    dispatch(movieFiltersActions.setToRatingAction(value));
+    setPage(1);
+  }, []);
 
   const resetFilters = useCallback(
-    (e: MouseEventHandler<HTMLButtonElement>) =>
-      dispatch(movieFiltersActions.resetFiltersAction()),
+    (e: MouseEventHandler<HTMLButtonElement>) => {
+      dispatch(movieFiltersActions.resetFiltersAction());
+      setPage(1);
+    },
     []
   );
 
