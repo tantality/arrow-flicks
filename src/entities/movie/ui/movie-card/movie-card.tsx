@@ -10,6 +10,7 @@ import StarIcon from "@/shared/assets/icons/yellow-star.svg";
 import dayjs from "dayjs";
 import { mapToFormattedMovieDescriptionItems } from "../../lib/map-to-formatted-movie-description-items";
 import { roundNumberToLetterAbbreviation } from "../../lib/round-number-to-letter-abbreviation";
+import Link from "next/link";
 
 export enum MovieCardSize {
   S = "sm",
@@ -20,6 +21,7 @@ export enum MovieCardSize {
 interface MovieCardProps {
   className?: string;
   size?: MovieCardSize;
+  isCardLink?: boolean;
   id: number;
   original_title: string;
   release_date: string;
@@ -36,7 +38,9 @@ interface MovieCardProps {
 export const MovieCard = memo((props: MovieCardProps) => {
   const {
     className,
+    isCardLink = false,
     size = MovieCardSize.M,
+    id,
     original_title,
     release_date,
     poster_path,
@@ -46,7 +50,7 @@ export const MovieCard = memo((props: MovieCardProps) => {
     budget,
     revenue,
     runtime,
-    rateMovieButton
+    rateMovieButton,
   } = props;
 
   const releaseYear = dayjs(release_date).isValid()
@@ -67,7 +71,7 @@ export const MovieCard = memo((props: MovieCardProps) => {
     movieDetails
   );
 
-  return (
+  const card = (
     <Card
       className={classNames(cls.movieCard, {}, [className, cls[size]])}
       size={CardSize.L}
@@ -109,4 +113,6 @@ export const MovieCard = memo((props: MovieCardProps) => {
       </Group>
     </Card>
   );
+
+  return isCardLink ? <Link href={`/movies/${id}`}>{card}</Link> : card;
 });

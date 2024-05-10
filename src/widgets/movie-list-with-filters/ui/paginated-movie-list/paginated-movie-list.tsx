@@ -38,6 +38,7 @@ export const PaginatedMovieList = memo((props: PaginatedMovieListProps) => {
         {data.results.map((movie) => (
           <GridCol span={6} key={movie.id}>
             <MovieRatingCard
+              isCardLink={true}
               className={cls.movieCard}
               size={MovieCardSize.M}
               {...movie}
