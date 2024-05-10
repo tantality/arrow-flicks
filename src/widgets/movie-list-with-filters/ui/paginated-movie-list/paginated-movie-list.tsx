@@ -49,12 +49,14 @@ export const PaginatedMovieList = memo((props: PaginatedMovieListProps) => {
           </GridCol>
         ))}
       </Grid>
-      <Pagination
-        className={cls.pagination}
-        total={data.total_pages}
-        value={page}
-        onChange={setPage}
-      />
+      {data.total_pages > 1 ? (
+        <Pagination
+          className={cls.pagination}
+          total={data.total_pages}
+          value={page}
+          onChange={setPage}
+        />
+      ) : null}
     </Stack>
   );
 });
