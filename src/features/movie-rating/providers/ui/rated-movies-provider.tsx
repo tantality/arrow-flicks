@@ -6,6 +6,7 @@ import {
 import { ReactNode, useEffect, useReducer } from "react";
 import { ratedMoviesReducer } from "../../model/reducers/rated-movies";
 import { ratedMoviesActions } from "../../model/actions/rated-movies";
+import { PaginationPageProvider } from "@/app/providers/PaginationPageProvider";
 
 const initialData: RatedMoviesState = {
   movies: [],
@@ -23,10 +24,12 @@ export const RatedMoviesProvider = ({ children }: RatedMoviesProviderProps) => {
   }, []);
 
   return (
-    <RatedMoviesContext.Provider value={ratedMovies}>
-      <RatedMoviesDispatchContext.Provider value={dispatch}>
-        {children}
-      </RatedMoviesDispatchContext.Provider>
-    </RatedMoviesContext.Provider>
+    <PaginationPageProvider>
+      <RatedMoviesContext.Provider value={ratedMovies}>
+        <RatedMoviesDispatchContext.Provider value={dispatch}>
+          {children}
+        </RatedMoviesDispatchContext.Provider>
+      </RatedMoviesContext.Provider>
+    </PaginationPageProvider>
   );
 };

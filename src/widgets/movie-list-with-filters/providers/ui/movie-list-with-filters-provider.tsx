@@ -12,12 +12,10 @@ export function MovieListWithFiltersProvider({
   children,
 }: MovieListWithFiltersProviderProps) {
   return (
-    <PaginationPageProvider>
-      <MovieGenreProvider>
-        <RatedMoviesProvider>
-          <MovieFiltersProvider>{children}</MovieFiltersProvider>
-        </RatedMoviesProvider>
-      </MovieGenreProvider>
-    </PaginationPageProvider>
+    <MovieGenreProvider>
+      <RatedMoviesProvider>
+        <MovieFiltersProvider>{children}</MovieFiltersProvider>
+      </RatedMoviesProvider>
+    </MovieGenreProvider>
   );
 }
