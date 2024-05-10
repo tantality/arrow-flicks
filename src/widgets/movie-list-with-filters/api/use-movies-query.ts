@@ -8,13 +8,21 @@ type UseQueryResultType<T, E = Error> = UseQueryResult<T, E>;
 
 export const useMoviesQuery = (
   filters: MovieFiltersState,
-  page: number,
+  page: number
 ): UseQueryResultType<MoviesDto> => {
   const { sortBy, releaseYear, toRating, fromRating, genreId } = filters;
-  
-  const queryParams = mapFiltersToMoviesQueryParams(filters, page)
+
+  const queryParams = mapFiltersToMoviesQueryParams(filters, page);
   const queryRes = useQuery({
-    queryKey: ["movies", sortBy, releaseYear, toRating, fromRating, genreId, page],
+    queryKey: [
+      "movies",
+      sortBy,
+      releaseYear,
+      toRating,
+      fromRating,
+      genreId,
+      page,
+    ],
     queryFn: () => getMovies(queryParams),
     staleTime: Infinity,
   });
@@ -26,9 +34,8 @@ const getMovies = async (params: MoviesQueryParams): Promise<MoviesDto> => {
   const res = await axiosInstance.get<MoviesDto>("discover/movie", {
     params: {
       language: "en-US",
-      ...params
+      ...params,
     },
   });
   return res.data;
 };
-

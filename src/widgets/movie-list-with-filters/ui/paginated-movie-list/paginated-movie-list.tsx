@@ -11,6 +11,7 @@ import {
 } from "@/entities/movie-genre";
 import { Pagination } from "@/shared/ui/pagination";
 import { MovieRatingCard } from "@/features/movie-rating-card";
+import { MAX_PAGE_AMOUNT } from "@/shared/const/api";
 
 interface PaginatedMovieListProps {
   className?: string;
@@ -27,6 +28,9 @@ export const PaginatedMovieList = memo((props: PaginatedMovieListProps) => {
   if (!data) {
     return "";
   }
+
+  const totalPages =
+    data.total_pages > MAX_PAGE_AMOUNT ? MAX_PAGE_AMOUNT : data.total_pages;
 
   return (
     <Stack
@@ -49,10 +53,10 @@ export const PaginatedMovieList = memo((props: PaginatedMovieListProps) => {
           </GridCol>
         ))}
       </Grid>
-      {data.total_pages > 1 ? (
+      {totalPages > 1 ? (
         <Pagination
           className={cls.pagination}
-          total={data.total_pages}
+          total={totalPages}
           value={page}
           onChange={setPage}
         />
