@@ -20,7 +20,7 @@ export const RatedMoviesProvider = ({ children }: RatedMoviesProviderProps) => {
 
   useEffect(() => {
     dispatch(ratedMoviesActions.initMovieRatingStateAction());
-  }, [ratedMovies]);
+  }, []);
 
   return (
     <RatedMoviesContext.Provider value={ratedMovies}>
