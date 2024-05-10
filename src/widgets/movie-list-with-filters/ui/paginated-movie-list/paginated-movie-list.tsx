@@ -21,9 +21,7 @@ export const PaginatedMovieList = memo((props: PaginatedMovieListProps) => {
   const [page, setPage] = useState<number>(1);
 
   const { data: filters } = useMovieFilters();
-
   const { data } = useMoviesQuery(filters, page);
-
   const genres = useMovieGenres();
 
   if (!data) {
@@ -45,7 +43,7 @@ export const PaginatedMovieList = memo((props: PaginatedMovieListProps) => {
               {...movie}
               key={movie.id}
               genres={getMovieGenreValuesByIds(movie.genre_ids, genres)}
-              release_date={movie.release_date as unknown as string}
+              release_date={movie.release_date}
             />
           </GridCol>
         ))}

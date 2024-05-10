@@ -15,7 +15,7 @@ export interface MovieDto {
   overview: string;
   popularity: number;
   poster_path: string;
-  release_date: Date;
+  release_date: string; //date
   title: string;
   video: boolean;
   vote_average: number;
