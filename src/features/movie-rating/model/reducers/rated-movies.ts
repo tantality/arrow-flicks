@@ -2,7 +2,7 @@ import { LocalStorageKeys } from "@/shared/const/local-storage";
 import {
   RatedMoviesActionTypes,
   RatedMoviesActions,
-} from "../../types/movie-rating-card";
+} from "../../types/movie-rating";
 import { RatedMoviesState } from "../contexts/rated-movies";
 
 export function ratedMoviesReducer(

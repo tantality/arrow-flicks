@@ -1,4 +1,4 @@
-import { RatedMoviesActionTypes } from "../../../types/movie-rating-card";
+import { RatedMoviesActionTypes } from "../../../types/movie-rating";
 
 export interface InitMovieRatingState {
   type: RatedMoviesActionTypes.InitMovieRatingState;

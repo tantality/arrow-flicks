@@ -5,7 +5,7 @@ import { MovieCard } from "@/entities/movie";
 import { MovieCardSize } from "@/entities/movie/ui/movie-card/movie-card";
 import { RateMovieButton } from "../rate-movie-button/rate-movie-button";
 import { RateMovieModal } from "../movie-rating-modal/movie-rating-modal";
-import { RatedMovie } from "../../types/movie-rating-card";
+import { RatedMovie } from "../../types/movie-rating";
 import { useMovieRating } from "../../hooks/use-movie-rating";
 
 interface MovieRatingCardProps {

@@ -10,7 +10,7 @@ import {
   useMovieGenres,
 } from "@/entities/movie-genre";
 import { Pagination } from "@/shared/ui/pagination";
-import { MovieRatingCard } from "@/features/movie-rating-card";
+import { MovieRatingCard } from "@/features/movie-rating";
 import { MAX_PAGE_AMOUNT } from "@/shared/const/api";
 import { usePaginationPage } from "@/app/providers/PaginationPageProvider";
 

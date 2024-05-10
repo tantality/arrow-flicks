@@ -3,7 +3,7 @@ import {
   RatedMoviesContext,
   RatedMoviesState,
 } from "../model/contexts/rated-movies";
-import { RatedMovie } from "../types/movie-rating-card";
+import { RatedMovie } from "../types/movie-rating";
 
 export const useMovieRating = (movieId: number): number | undefined => {
   const { movies } = useContext(RatedMoviesContext) as RatedMoviesState;

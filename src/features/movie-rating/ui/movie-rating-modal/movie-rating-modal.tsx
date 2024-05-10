@@ -4,7 +4,7 @@ import { memo, useCallback, useState } from "react";
 import { Group, Modal, ModalProps, Rating, Stack } from "@mantine/core";
 import { FilledButton } from "@/shared/ui/filled-button";
 import { TextButton } from "@/shared/ui/text-button";
-import { RatedMovie } from "../../types/movie-rating-card";
+import { RatedMovie } from "../../types/movie-rating";
 import { useRatedMoviesDispatch } from "../../hooks/use-rated-movies-dispatch";
 import { ratedMoviesActions } from "../../model/actions/rated-movies";
 

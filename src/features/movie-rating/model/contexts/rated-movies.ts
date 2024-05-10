@@ -1,5 +1,5 @@
 import { createContext, Dispatch } from "react";
-import { RatedMovie, RatedMoviesActions } from "../../types/movie-rating-card";
+import { RatedMovie, RatedMoviesActions } from "../../types/movie-rating";
 
 export interface RatedMoviesState {
   movies: RatedMovie[];

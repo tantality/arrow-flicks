@@ -1,4 +1,4 @@
-import { RatedMoviesActionTypes, RatedMovie } from "../../../types/movie-rating-card";
+import { RatedMoviesActionTypes, RatedMovie } from "../../../types/movie-rating";
 
 export interface RemoveMovieRating {
   type: RatedMoviesActionTypes.RemoveMovieRating;

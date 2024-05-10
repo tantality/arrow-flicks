@@ -3,7 +3,7 @@ import {
   RatedMoviesContext,
   RatedMoviesState,
 } from "../model/contexts/rated-movies";
-import { RatedMovie } from "../types/movie-rating-card";
+import { RatedMovie } from "../types/movie-rating";
 import { usePaginationPage } from "@/app/providers/PaginationPageProvider";
 import { calculatePageCount } from "@/shared/lib/calculate-page-count";
 import { getDataChunk } from "@/shared/lib/get-data-chunk";
