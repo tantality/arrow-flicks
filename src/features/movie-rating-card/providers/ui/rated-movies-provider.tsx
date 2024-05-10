@@ -1,18 +1,14 @@
-import { LocalStorageKeys } from "@/shared/const/local-storage";
 import {
   RatedMoviesContext,
   RatedMoviesDispatchContext,
   RatedMoviesState,
 } from "../../model/contexts/rated-movies";
-import { ReactNode, useReducer } from "react";
+import { ReactNode, useEffect, useReducer } from "react";
 import { ratedMoviesReducer } from "../../model/reducers/rated-movies";
+import { ratedMoviesActions } from "../../model/actions/rated-movies";
 
-const IS_SERVER = typeof window === "undefined";
-
-export const initialData: RatedMoviesState = {
-  movies: !IS_SERVER
-    ? JSON.parse(localStorage.getItem(LocalStorageKeys.RatedMovies) ?? "[]")
-    : [],
+const initialData: RatedMoviesState = {
+  movies: [],
 };
 
 interface RatedMoviesProviderProps {
@@ -21,6 +17,10 @@ interface RatedMoviesProviderProps {
 
 export const RatedMoviesProvider = ({ children }: RatedMoviesProviderProps) => {
   const [ratedMovies, dispatch] = useReducer(ratedMoviesReducer, initialData);
+
+  useEffect(() => {
+    dispatch(ratedMoviesActions.initMovieRatingStateAction());
+  }, [ratedMovies]);
 
   return (
     <RatedMoviesContext.Provider value={ratedMovies}>

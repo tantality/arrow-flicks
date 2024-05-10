@@ -1,3 +1,4 @@
+import { InitMovieRatingState } from "../model/actions/rated-movies/init-movie-rating-state";
 import { RemoveMovieRating } from "../model/actions/rated-movies/remove-movie-rating";
 import { UpdateMovieRating } from "../model/actions/rated-movies/update-movie-rating";
 
@@ -19,6 +20,7 @@ export interface RatedMovie {
 export enum RatedMoviesActionTypes {
   UpdateMovieRating = "update-movie-rating",
   RemoveMovieRating = "remove-movie-rating",
+  InitMovieRatingState = "init-movie-rating-state",
 }
 
-export type RatedMoviesActions = UpdateMovieRating | RemoveMovieRating;
+export type RatedMoviesActions = UpdateMovieRating | RemoveMovieRating | InitMovieRatingState;

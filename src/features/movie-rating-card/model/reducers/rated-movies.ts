@@ -38,5 +38,11 @@ export function ratedMoviesReducer(
 
       return { ...state, movies: moviesWithoutMovieToRemove };
     }
+    case RatedMoviesActionTypes.InitMovieRatingState: {
+      const lsMovies = JSON.parse(
+        localStorage.getItem(LocalStorageKeys.RatedMovies) ?? "[]"
+      );
+      return { ...state, movies: lsMovies };
+    }
   }
 }
