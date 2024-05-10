@@ -1,0 +1,28 @@
+/* stylelint-disable declaration-block-no-redundant-longhand-properties */
+.app {
+  color: var(--accent-base-text-color);
+  min-height: 100vh;
+  background-color: var(--app-bg-color);
+}
+
+.appContainer {
+  display: grid;
+  grid-template-areas: "sidebar pageContent";
+  grid-template-columns: max-content 1fr;
+  grid-template-rows: 100vh;
+}
+
+.appSidebar {
+  grid-area: sidebar;
+}
+
+.appPage {
+  grid-area: pageContent;
+  overflow-y: auto;
+  padding: 40px 40px 82px;
+}
+
+.pageContainer {
+  margin: 0 auto;
+  max-width: 980px;
+}
