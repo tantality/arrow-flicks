@@ -3,9 +3,11 @@
 }
 
 .isHidden {
+  position: absolute;
   opacity: 0;
 }
 
 .isVisible {
+  position: normal;
   opacity: 1;
 }

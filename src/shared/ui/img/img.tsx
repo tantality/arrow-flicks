@@ -10,11 +10,11 @@ interface ImgProps {
   height: number;
   width: number;
   loadingComp: ReactNode;
-  errorComp: ReactNode;
+  placeholder: ReactNode;
 }
 
 export const Img = memo((props: ImgProps) => {
-  const { className, src, loadingComp, errorComp, ...otherProps } = props;
+  const { className, src, loadingComp, placeholder, ...otherProps } = props;
   const [isImgLoadedWithError, setIsImgLoadedWithError] = useState(false);
   const [isImgLoading, setIsLoading] = useState(true);
 
@@ -30,8 +30,8 @@ export const Img = memo((props: ImgProps) => {
   return (
     <>
       {isImgLoading ? loadingComp : null}
-      {isImgLoadedWithError ? (
-        errorComp
+      {isImgLoadedWithError && !isImgLoading ? (
+        placeholder
       ) : (
         <Image
           src={src}
