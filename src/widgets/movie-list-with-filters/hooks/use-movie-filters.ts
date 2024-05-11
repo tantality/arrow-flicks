@@ -1,4 +1,4 @@
-import { MouseEventHandler, useCallback, useContext, useMemo } from "react";
+import { MouseEvent, useCallback, useContext, useMemo } from "react";
 import {
   MovieFiltersContext,
   MovieFiltersState,
@@ -16,7 +16,7 @@ interface UseMovieFiltersType {
   setReleaseYear: (value: string | null) => void;
   setFromRating: (value: string | number) => void;
   setToRating: (value: string | number) => void;
-  resetFilters: (e: any) => void;
+  resetFilters: (e: MouseEvent<HTMLButtonElement>) => void;
   areFiltersEmpty: boolean;
 }
 
@@ -47,13 +47,10 @@ export const useMovieFilters = (): UseMovieFiltersType => {
     setPage(1);
   }, []);
 
-  const setReleaseYear = useDebouncedCallback(
-    useCallback((value: string | null) => {
-      dispatch(movieFiltersActions.setReleaseYearAction(value));
-      setPage(1);
-    }, []),
-    delay
-  );
+  const setReleaseYear = useCallback((value: string | null) => {
+    dispatch(movieFiltersActions.setReleaseYearAction(value));
+    setPage(1);
+  }, []);
 
   const setFromRating = useDebouncedCallback(
     useCallback((value: string | number) => {
@@ -63,13 +60,16 @@ export const useMovieFilters = (): UseMovieFiltersType => {
     delay
   );
 
-  const setToRating = useCallback((value: string | number) => {
-    dispatch(movieFiltersActions.setToRatingAction(value));
-    setPage(1);
-  }, []);
+  const setToRating = useDebouncedCallback(
+    useCallback((value: string | number) => {
+      dispatch(movieFiltersActions.setToRatingAction(value));
+      setPage(1);
+    }, []),
+    delay
+  );
 
   const resetFilters = useCallback(
-    (e: MouseEventHandler<HTMLButtonElement>) => {
+    (e: MouseEvent<HTMLButtonElement>) => {
       dispatch(movieFiltersActions.resetFiltersAction());
       setPage(1);
     },
