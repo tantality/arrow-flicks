@@ -1,10 +1,11 @@
 import { classNames } from "@/shared/lib/classNames/classNames";
-import { ReactNode, memo, useEffect, useState } from "react";
+import { ReactNode, memo, useState } from "react";
+import cls from "./img.module.scss";
 import Image from "next/image";
 
 interface ImgProps {
   className?: string;
-  src: string;
+  src?: string | null;
   alt: string;
   height: number;
   width: number;
@@ -13,17 +14,28 @@ interface ImgProps {
 }
 
 export const Img = memo((props: ImgProps) => {
-  const { className, loadingComp, errorComp, ...otherProps } = props;
+  const { className, src, loadingComp, errorComp, ...otherProps } = props;
   const [isImgLoadedWithError, setIsImgLoadedWithError] = useState(false);
   const [isImgLoading, setIsLoading] = useState(true);
 
+  if (!src) {
+    return null;
+  }
+
+  const mods = {
+    [cls.isHidden]: isImgLoading,
+    [cls.isVisible]: !isImgLoading,
+  };
+
   return (
-    <div className={classNames("", {}, [className])}>
+    <>
       {isImgLoading ? loadingComp : null}
       {isImgLoadedWithError ? (
         errorComp
       ) : (
         <Image
+          src={src}
+          className={classNames(cls.img, mods, [className])}
           onLoad={() => setIsLoading(false)}
           onError={() => {
             setIsLoading(false);
@@ -32,6 +44,6 @@ export const Img = memo((props: ImgProps) => {
           {...otherProps}
         />
       )}
-    </div>
+    </>
   );
 });

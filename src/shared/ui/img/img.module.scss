@@ -1,0 +1,11 @@
+.img {
+  transition: opacity 1s;
+}
+
+.isHidden {
+  opacity: 0;
+}
+
+.isVisible {
+  opacity: 1;
+}
