@@ -12,12 +12,13 @@ type PickedMantineTextInputProps = Pick<
 
 interface SearchInputProps extends PickedMantineTextInputProps {
   className?: string;
+  onSearch: () => void;
 }
 
 const BTN_HORIZONTAL_PADDINGS = 24;
 
 export const SearchInput = memo((props: SearchInputProps) => {
-  const { className, ...otherProps } = props;
+  const { className, onSearch, ...otherProps } = props;
 
   const searchBtn = useRef() as MutableRefObject<HTMLButtonElement>;
   const [searchBtnWidth, setSearchBtnWidth] = useState<number>();
@@ -32,7 +33,7 @@ export const SearchInput = memo((props: SearchInputProps) => {
     : "auto";
 
   const searchButton = (
-    <FilledButton size={FilledButtonSize.S} ref={searchBtn}>
+    <FilledButton size={FilledButtonSize.S} ref={searchBtn} onClick={onSearch}>
       Search
     </FilledButton>
   );
