@@ -10,6 +10,7 @@ import { PaginationPageProvider } from "@/app/providers/PaginationPageProvider";
 
 const initialData: RatedMoviesState = {
   movies: [],
+  isInit: false,
 };
 
 interface RatedMoviesProviderProps {

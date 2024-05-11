@@ -42,7 +42,7 @@ export function ratedMoviesReducer(
       const lsMovies = JSON.parse(
         localStorage.getItem(LocalStorageKeys.RatedMovies) ?? "[]"
       );
-      return { ...state, movies: lsMovies };
+      return { ...state, movies: lsMovies, isInit: true };
     }
   }
 }
