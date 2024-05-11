@@ -21,7 +21,7 @@ export enum MovieCardSize {
 interface MovieCardProps {
   className?: string;
   size?: MovieCardSize;
-  isCardLink?: boolean;
+  isTitleLink?: boolean;
   id: number;
   original_title: string;
   release_date: string;
@@ -38,7 +38,7 @@ interface MovieCardProps {
 export const MovieCard = memo((props: MovieCardProps) => {
   const {
     className,
-    isCardLink = false,
+    isTitleLink = false,
     size = MovieCardSize.M,
     id,
     original_title,
@@ -71,7 +71,15 @@ export const MovieCard = memo((props: MovieCardProps) => {
     movieDetails
   );
 
-  const card = (
+  const tittle = isTitleLink ? (
+    <Link href={`/movies/${id}`}>
+      <div className={cls.title}>{original_title}</div>
+    </Link>
+  ) : (
+    <div className={cls.title}>{original_title}</div>
+  );
+
+  return (
     <Card
       className={classNames(cls.movieCard, {}, [className, cls[size]])}
       size={CardSize.L}
@@ -87,7 +95,7 @@ export const MovieCard = memo((props: MovieCardProps) => {
         <Stack className={cls.body} justify="space-between">
           <Group className={cls.header}>
             <Stack gap={"0.5rem"}>
-              <div className={cls.title}>{original_title}</div>
+              {tittle}
               {releaseYear && (
                 <div className={cls.releaseYear}>{releaseYear}</div>
               )}
@@ -113,6 +121,4 @@ export const MovieCard = memo((props: MovieCardProps) => {
       </Group>
     </Card>
   );
-
-  return isCardLink ? <Link href={`/movies/${id}`}>{card}</Link> : card;
 });
