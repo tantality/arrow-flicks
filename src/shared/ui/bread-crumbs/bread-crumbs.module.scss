@@ -4,9 +4,10 @@
   font: var(--text-base-s-regular-font);
   color: var(--breadcrumb-text-color);
 
-  :global(.mantine-Anchor-root) {
+  .link {
     font: var(--text-base-s-regular-font);
-    
+    color: var(--breadcrumb-text-color);
+
     &:hover {
       color: #bd93f7;
       text-decoration: none;

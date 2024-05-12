@@ -1,7 +1,8 @@
 import { classNames } from "@/shared/lib/classNames/classNames";
 import cls from "./bread-crumbs.module.scss";
 import { memo } from "react";
-import { Anchor, Breadcrumbs as MantineBreadcrumbs } from "@mantine/core";
+import { Breadcrumbs as MantineBreadcrumbs } from "@mantine/core";
+import Link from "next/link";
 
 export enum BreadCrumbsTheme {
   PRIMARY = "primary",
@@ -23,9 +24,9 @@ export const BreadCrumbs = memo((props: BreadCrumbsProps) => {
 
   const renderList = items.map((item, index) => {
     return item.href ? (
-      <Anchor href={item.href} key={index}>
+      <Link className={cls.link} href={item.href} key={index}>
         {item.title}
-      </Anchor>
+      </Link>
     ) : (
       <div className={cls.title}>{item.title}</div>
     );
