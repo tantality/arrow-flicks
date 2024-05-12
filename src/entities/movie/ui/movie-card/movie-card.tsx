@@ -2,7 +2,7 @@ import { classNames } from "@/shared/lib/classNames/classNames";
 import cls from "./movie-card.module.scss";
 import { ReactNode, memo } from "react";
 import { Card, CardSize } from "@/shared/ui/card";
-import { Group, Stack } from "@mantine/core";
+import { Group, Skeleton, Stack } from "@mantine/core";
 import { MovieCardDescriptionList } from "../movie-card-description-list/movie-card-description-list";
 import NoPosterLImg from "@/shared/assets/imgs/no-poster-l.svg";
 import NoPosterSImg from "@/shared/assets/imgs/no-poster-s.svg";
@@ -11,6 +11,9 @@ import dayjs from "dayjs";
 import { mapToFormattedMovieDescriptionItems } from "../../lib/map-to-formatted-movie-description-items";
 import { roundNumberToLetterAbbreviation } from "../../lib/round-number-to-letter-abbreviation";
 import Link from "next/link";
+import { Img } from "@/shared/ui/img";
+import { APT_IMG_URL } from "@/shared/const/api";
+import { getMovieDetailsRoute } from "@/shared/const/router";
 
 export enum MovieCardSize {
   S = "sm",
@@ -34,6 +37,9 @@ interface MovieCardProps {
   runtime?: number;
   rateMovieButton?: ReactNode;
 }
+
+const API_IMG_URL_L = `${APT_IMG_URL}/w342`;
+const API_IMG_URL_S_M = `${APT_IMG_URL}/w154`;
 
 export const MovieCard = memo((props: MovieCardProps) => {
   const {
@@ -72,12 +78,33 @@ export const MovieCard = memo((props: MovieCardProps) => {
   );
 
   const tittle = isTitleLink ? (
-    <Link href={`/movies/${id}`}>
+    <Link href={getMovieDetailsRoute(id)}>
       <div className={cls.title}>{original_title}</div>
     </Link>
   ) : (
     <div className={cls.title}>{original_title}</div>
   );
+
+  const img =
+    size === MovieCardSize.L ? (
+      <Img
+        src={`${API_IMG_URL_L + poster_path}`}
+        alt={original_title}
+        height={352}
+        width={250}
+        placeholder={<NoPosterLImg alt="poster-placeholder" />}
+        loadingComp={<Skeleton height={352} width={250} radius={0} />}
+      />
+    ) : (
+      <Img
+        src={`${API_IMG_URL_S_M + poster_path}`}
+        alt={original_title}
+        height={170}
+        width={119}
+        placeholder={<NoPosterSImg alt="poster-placeholder" />}
+        loadingComp={<Skeleton height={170} width={119} radius={0} />}
+      />
+    );
 
   return (
     <Card
@@ -85,13 +112,7 @@ export const MovieCard = memo((props: MovieCardProps) => {
       size={CardSize.L}
     >
       <Group gap={"1rem"} className={cls.container}>
-        <div className={cls.poster}>
-          {size === MovieCardSize.L ? (
-            <NoPosterLImg alt="poster-placeholder" />
-          ) : (
-            <NoPosterSImg alt="poster-placeholder" />
-          )}
-        </div>
+        <div className={cls.poster}>{img}</div>
         <Stack className={cls.body} justify="space-between">
           <Group className={cls.header}>
             <Stack gap={"0.5rem"}>
