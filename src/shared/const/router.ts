@@ -5,7 +5,7 @@ export enum AppRoutes {
 }
 
 export const getMoviesRoute = () => '/movies';
-export const getMovieDetailsRoute = (id: string) => `/movies/${id}`;
+export const getMovieDetailsRoute = (id: string | number) => `/movies/${id}`;
 export const getRatedMoviesRoute = () => '/movies/rated';
 
 export const AppRoutesByRouteName: Record<AppRoutes, string> = {
