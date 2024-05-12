@@ -1,0 +1,17 @@
+.breadCrumbs {
+  --mantine-color-anchor: var(--breadcrumb-text-color);
+  
+  font: var(--text-base-s-regular-font);
+  color: var(--breadcrumb-text-color);
+
+  :global(.mantine-Anchor-root) {
+    &:hover {
+      color: #bd93f7;
+      text-decoration: none;
+    }
+  }
+
+  .title {
+    cursor: default;
+  }
+}
