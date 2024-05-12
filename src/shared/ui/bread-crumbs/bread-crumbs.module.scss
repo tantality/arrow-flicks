@@ -5,6 +5,8 @@
   color: var(--breadcrumb-text-color);
 
   :global(.mantine-Anchor-root) {
+    font: var(--text-base-s-regular-font);
+    
     &:hover {
       color: #bd93f7;
       text-decoration: none;
