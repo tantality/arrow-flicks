@@ -1,0 +1,12 @@
+.productionCompanyItem {
+  .logo {
+    object-fit: contain;
+    border: 0.5px solid #f1f1f1;
+    border-radius: 50%;
+    flex-grow: 0;
+  }
+
+  .companyName {
+    font: var(--text-base-m-bold-font);
+  }
+}
