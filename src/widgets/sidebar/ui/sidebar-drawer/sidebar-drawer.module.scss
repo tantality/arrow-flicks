@@ -1,0 +1,17 @@
+.sidebarDrawer {
+  :global(.mantine-Drawer-content) {
+    flex-basis: min-content;
+  }
+
+  :global(.mantine-Drawer-header) {
+    display: none;
+  }
+
+  :global(.mantine-Drawer-body) {
+    padding: 0;
+  }
+
+  .drawerContent {
+    height: 100vh;
+  }
+}
