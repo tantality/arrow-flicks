@@ -86,3 +86,8 @@ export enum VideoTypes {
 export enum SiteDto {
   YouTube = "YouTube",
 }
+
+export interface MovieCardDescriptionListItem {
+  name: string;
+  value: string | number;
+}

@@ -1,7 +1,7 @@
 import { classNames } from "@/shared/lib/classNames/classNames";
 import cls from "./movie-card-description-list.module.scss";
 import { memo } from "react";
-import { MovieCardDescriptionListItem } from "../../model/types/movie";
+import { MovieCardDescriptionListItem } from "../../model/types/movie-details";
 import React from "react";
 import { MovieCardSize } from "../movie-card/movie-card";
 
