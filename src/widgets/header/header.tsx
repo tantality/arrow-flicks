@@ -6,12 +6,16 @@ import { Group } from "@mantine/core";
 import { SidebarDrawer } from "../sidebar/ui/sidebar-drawer/sidebar-drawer";
 import MenuIcon from "@/shared/assets/icons/menu.svg";
 
+type HederTheme = "transparent" | "light";
+
 interface HeaderProps {
   className?: string;
+  theme?: HederTheme;
+  withMenu: boolean;
 }
 
 export const Header = memo((props: HeaderProps) => {
-  const { className, ...otherProps } = props;
+  const { className, withMenu = true, theme = "light", ...otherProps } = props;
 
   const [isDrawerOpened, setIsDrawerOpened] = useState(false);
 
@@ -24,11 +28,21 @@ export const Header = memo((props: HeaderProps) => {
   };
 
   return (
-    <header className={classNames(cls.header, {}, [className])} {...otherProps}>
+    <header
+      className={classNames(cls.header, {}, [className, cls[theme]])}
+      {...otherProps}
+    >
       <Group gap={"1.5rem"}>
-        <MenuIcon className={cls.menu} onClick={handleMenuButtonClick} />
+        {withMenu ? (
+          <MenuIcon className={cls.menu} onClick={handleMenuButtonClick} />
+        ) : null}
         <Logo />
-        <SidebarDrawer isOpened={isDrawerOpened} onClose={handleDrawerClose} />
+        {withMenu ? (
+          <SidebarDrawer
+            isOpened={isDrawerOpened}
+            onClose={handleDrawerClose}
+          />
+        ) : null}
       </Group>
     </header>
   );

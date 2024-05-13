@@ -1,9 +1,15 @@
 .header {
-  background-color: #f2ebf9;
   padding: 1.5rem;
 
-
-  .menu{
+  .menu {
     cursor: pointer;
   }
+}
+
+.light {
+  background-color: #f2ebf9;
+}
+
+.transparent {
+  background-color: transparent;
 }
