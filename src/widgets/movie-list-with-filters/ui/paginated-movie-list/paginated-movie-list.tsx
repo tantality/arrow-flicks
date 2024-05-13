@@ -13,6 +13,7 @@ import { Pagination } from "@/shared/ui/pagination";
 import { MovieRatingCard } from "@/features/movie-rating";
 import { MAX_PAGE_AMOUNT } from "@/shared/const/api";
 import { usePaginationPage } from "@/app/providers/PaginationPageProvider";
+import { NoFilteredMoviesScreen } from "../no-filtered-movies-screen/no-filtered-movies-screen";
 
 interface PaginatedMovieListProps {
   className?: string;
@@ -23,11 +24,17 @@ export const PaginatedMovieList = memo((props: PaginatedMovieListProps) => {
 
   const { page, setPage } = usePaginationPage();
   const { data: filters } = useMovieFilters();
-  const { data } = useMoviesQuery(filters);
+  const { data, isLoading } = useMoviesQuery(filters);
   const genres = useMovieGenres();
 
+  const areThereNoResults = data && !data.results.length && !isLoading;
+
+  if (areThereNoResults || filters.noFilterResults) {
+    return <NoFilteredMoviesScreen />;
+  }
+
   if (!data) {
-    return "";
+    return null;
   }
 
   const totalPages =
