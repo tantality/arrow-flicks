@@ -1,9 +1,7 @@
 import cls from "./movies-page.module.scss";
 import { Sidebar } from "@/widgets/sidebar";
-import { Group, Stack, Title } from "@mantine/core";
 import {
-  MovieFilters,
-  PaginatedMovieList,
+  RatedMovieListWithFilters,
   RatedMovieListWithFiltersProvider,
 } from "@/widgets/rated-movie-list-with-filters";
 
@@ -15,13 +13,7 @@ const RatedMovies = () => {
           <Sidebar className={cls.appSidebar} />
           <div className={cls.appPage}>
             <div className={cls.pageContainer}>
-              <Stack gap={"2.5rem"}>
-                <Group justify="flex-start" grow>
-                  <Title order={1}>Rated movies</Title>
-                  <MovieFilters />
-                </Group>
-                <PaginatedMovieList />
-              </Stack>
+              <RatedMovieListWithFilters />
             </div>
           </div>
         </div>
