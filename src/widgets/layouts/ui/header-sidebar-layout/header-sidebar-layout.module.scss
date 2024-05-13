@@ -1,0 +1,29 @@
+/* stylelint-disable declaration-block-no-redundant-longhand-properties */
+.headerSidebarLayout {
+  display: grid;
+  grid-template-areas: "header header" "sidebar pageContent";
+  grid-template-columns: max-content 1fr;
+  grid-template-rows: repeat(2, max-content);
+}
+
+.layoutSidebar {
+  grid-area: sidebar;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.layoutHeader {
+  grid-area: header;
+}
+
+.layoutPage {
+  grid-area: pageContent;
+  overflow-y: auto;
+  padding: 40px 40px 82px;
+}
+
+.pageContainer {
+  margin: 0 auto;
+  height: 100%;
+}
