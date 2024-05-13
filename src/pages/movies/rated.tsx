@@ -1,23 +1,19 @@
-import cls from "./movies-page.module.scss";
 import { Sidebar } from "@/widgets/sidebar";
 import {
   RatedMovieListWithFilters,
   RatedMovieListWithFiltersProvider,
 } from "@/widgets/rated-movie-list-with-filters";
+import { HeaderSidebarLayout } from "@/widgets/layouts";
+import { Header } from "@/widgets/header";
 
 const RatedMovies = () => {
   return (
     <RatedMovieListWithFiltersProvider>
-      <div className={cls.app}>
-        <div className={cls.appContainer}>
-          <Sidebar className={cls.appSidebar} />
-          <div className={cls.appPage}>
-            <div className={cls.pageContainer}>
-              <RatedMovieListWithFilters />
-            </div>
-          </div>
-        </div>
-      </div>
+      <HeaderSidebarLayout
+        header={<Header />}
+        sidebar={<Sidebar />}
+        content={<RatedMovieListWithFilters />}
+      />
     </RatedMovieListWithFiltersProvider>
   );
 };

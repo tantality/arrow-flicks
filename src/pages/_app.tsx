@@ -8,7 +8,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ReactQueryProvider>
       <ThemeProvider>
-        <Component {...pageProps} />
+        <div className="app">
+          <Component {...pageProps} />
+        </div>
       </ThemeProvider>
     </ReactQueryProvider>
   );

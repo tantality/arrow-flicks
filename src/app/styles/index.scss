@@ -1,6 +1,8 @@
 @import "reset";
 
-body {
+.app {
+  color: var(--accent-base-text-color);
+  min-height: 100vh;
   background-color: var(--app-bg-color);
 }
 
