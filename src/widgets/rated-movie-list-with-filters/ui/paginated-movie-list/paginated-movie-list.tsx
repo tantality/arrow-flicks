@@ -7,6 +7,7 @@ import { Pagination } from "@/shared/ui/pagination";
 import { MovieRatingCard } from "@/features/movie-rating";
 import { usePaginationPage } from "@/app/providers/PaginationPageProvider";
 import { useRatedMoviesChunk } from "../../hooks/use-rated-movies-chunk";
+import { NoFilteredMoviesScreen } from "../no-filtered-movies-screen/no-filtered-movies-screen";
 
 interface PaginatedMovieListProps {
   className?: string;
@@ -18,7 +19,12 @@ export const PaginatedMovieList = memo((props: PaginatedMovieListProps) => {
   const { className, ...otherProps } = props;
 
   const { page, setPage } = usePaginationPage();
-  const { movies, totalPages } = useRatedMoviesChunk(moviesPerPage);
+  const { movies, totalPages, areMoviesFilteredAfterInit } =
+    useRatedMoviesChunk(moviesPerPage);
+
+  if (!movies.length && areMoviesFilteredAfterInit) {
+    return <NoFilteredMoviesScreen />;
+  }
 
   return (
     <Stack
