@@ -10,7 +10,7 @@ import { usePaginationPage } from "@/app/providers/PaginationPageProvider";
 interface UseRatedMovieFiltersType {
   filters: RatedMovieFiltersState;
   setTitle: (e: ChangeEvent<HTMLInputElement>) => void;
-  resetFilters: (e: MouseEvent<HTMLButtonElement>) => void;
+  resetFilters: (e?: MouseEvent<HTMLButtonElement>) => void;
 }
 
 export const useRatedMovieFilters = (): UseRatedMovieFiltersType => {
@@ -24,7 +24,7 @@ export const useRatedMovieFilters = (): UseRatedMovieFiltersType => {
     dispatch(ratedMovieFiltersActions.setTitleAction(e.target.value));
   };
 
-  const resetFilters = useCallback((e: MouseEvent<HTMLButtonElement>) => {
+  const resetFilters = useCallback((e?: MouseEvent<HTMLButtonElement>) => {
     dispatch(ratedMovieFiltersActions.resetFiltersAction());
     setPage(1);
   }, []);

@@ -10,6 +10,7 @@ import { RatedMovie, useRatedMovies } from "@/features/movie-rating";
 interface UseRatedMoviesType {
   movies: RatedMovie[];
   totalPages: number;
+  areMoviesFilteredAfterInit: boolean;
 }
 
 export const useRatedMoviesChunk = (
@@ -17,13 +18,17 @@ export const useRatedMoviesChunk = (
 ): UseRatedMoviesType => {
   const { movies, isInit } = useRatedMovies();
   const [filteredMovies, setFilteredMovies] = useState(movies);
+  const [areMoviesFilteredAfterInit, setAreMoviesFilteredAfterInit] = useState(false);
   
   const dispatch = useRatedMovieFiltersDispatch();
   const { page, setPage } = usePaginationPage();
   const { filters } = useRatedMovieFilters();
 
   useEffect(() => {
-    setFilteredMovies(movies);
+    if(isInit){
+      setFilteredMovies(movies);
+      setAreMoviesFilteredAfterInit(true)
+    }
   }, [isInit]);
 
   useEffect(() => {
@@ -49,7 +54,7 @@ export const useRatedMoviesChunk = (
     [filteredMovies, itemsPerPage]
   );
 
-  return { movies: movieChunk, totalPages };
+  return { movies: movieChunk, totalPages, areMoviesFilteredAfterInit };
 };
 
 const findMoviesByTitle = (movies: RatedMovie[], title?: string) => {
