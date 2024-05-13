@@ -9,11 +9,14 @@
   display: grid;
   grid-template-areas: "sidebar pageContent";
   grid-template-columns: max-content 1fr;
-  grid-template-rows: 100vh;
+  grid-template-rows: max-content;
 }
 
 .appSidebar {
   grid-area: sidebar;
+  position: sticky;
+  top: 0;
+  height: 100vh;
 }
 
 .appPage {
@@ -25,4 +28,5 @@
 .pageContainer {
   margin: 0 auto;
   max-width: 980px;
+  height: 100%;
 }
