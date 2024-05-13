@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import { MovieCardSize } from "../ui/movie-card/movie-card";
-import { MovieCardDescriptionListItem } from "../model/types/movie";
+import { MovieCardDescriptionListItem } from "../model/types/movie-details";
 import { isValueDefined } from "@/shared/lib/is-value-defined";
 
 interface MovieDetails {
@@ -35,7 +35,8 @@ function mapToFormattedMovieDescriptionItems(
         name: "Gross worldwide",
         value: translateNumberIntoThousandsOfDollars(revenue),
       },
-      genres && {
+      genres &&
+      genres!.length > 0 && {
         name: "Genres",
         value: genres.join(", "),
       },
@@ -43,7 +44,8 @@ function mapToFormattedMovieDescriptionItems(
   }
 
   return [
-    isValueDefined(genres) && {
+    isValueDefined(genres) &&
+    genres!.length > 0 && {
       name: "Genres",
       value: genres!.join(", "),
     },
