@@ -7,6 +7,7 @@ export interface MovieFiltersState {
   fromRating?: string | number;
   toRating?: string | number;
   sortBy?: string | null;
+  noFilterResults: boolean;
 }
 
 export const MovieFiltersContext = createContext<MovieFiltersState | null>(null);

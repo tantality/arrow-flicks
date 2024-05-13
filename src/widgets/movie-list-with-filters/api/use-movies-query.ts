@@ -10,11 +10,12 @@ type UseQueryResultType<T, E = Error> = UseQueryResult<T, E>;
 export const useMoviesQuery = (
   filters: MovieFiltersState
 ): UseQueryResultType<MoviesDto> => {
-  const { sortBy, releaseYear, toRating, fromRating, genreId } = filters;
+  const { sortBy, releaseYear, toRating, fromRating, genreId, noFilterResults } = filters;
 
   const { page } = usePaginationPage();
 
   const queryParams = mapFiltersToMoviesQueryParams(filters, page);
+
   const queryRes = useQuery({
     queryKey: [
       "movies",
@@ -27,6 +28,7 @@ export const useMoviesQuery = (
     ],
     queryFn: () => getMovies(queryParams),
     staleTime: Infinity,
+    enabled : !noFilterResults
   });
 
   return queryRes;

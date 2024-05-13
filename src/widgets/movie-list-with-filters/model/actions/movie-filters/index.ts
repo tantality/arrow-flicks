@@ -1,4 +1,5 @@
 import { resetFiltersAction } from "./reset-filters";
+import { setNoFilterResults } from "./set-no-filter-results";
 import { setFromRatingAction } from "./set-from-rating";
 import { setGenreIdAction } from "./set-genre-id";
 import { setReleaseYearAction } from "./set-release-year";
@@ -11,5 +12,6 @@ export const movieFiltersActions = {
   setFromRatingAction,
   setToRatingAction,
   setSortByAction,
-  resetFiltersAction
+  resetFiltersAction,
+  setNoFilterResults
 };

@@ -24,6 +24,9 @@ export function movieFiltersReducer(
     case MovieFiltersActionTypes.SetToRating: {
       return { ...state, toRating: action.payload };
     }
+    case MovieFiltersActionTypes.SetNoFilterResults: {
+      return { ...state, noFilterResults: action.payload };
+    }
     case MovieFiltersActionTypes.ResetFilters: {
       return {
         ...state,

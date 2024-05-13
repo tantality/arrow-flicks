@@ -12,6 +12,7 @@ export const initialData: MovieFiltersState = {
   fromRating: undefined,
   toRating: undefined,
   sortBy: "popularity.desc",
+  noFilterResults: false,
 };
 
 interface MovieFiltersProviderProps {

@@ -1,4 +1,5 @@
 import { ResetFilters } from "../actions/movie-filters/reset-filters";
+import { SetNoFilterResults } from "../actions/movie-filters/set-no-filter-results";
 import { SetFromRating } from "../actions/movie-filters/set-from-rating";
 import { SetGenreId } from "../actions/movie-filters/set-genre-id";
 import { SetReleaseYear } from "../actions/movie-filters/set-release-year";
@@ -12,6 +13,7 @@ export enum MovieFiltersActionTypes {
   SetToRating = "set-to-rating",
   SetSortBy = "set-sort-by",
   ResetFilters = "reset-filters",
+  SetNoFilterResults = "set-no-filter-results"
 }
 
 export type MovieFiltersActions =
@@ -20,4 +22,5 @@ export type MovieFiltersActions =
   | SetSortBy
   | SetFromRating
   | SetToRating
-  | ResetFilters;
+  | ResetFilters 
+  | SetNoFilterResults;
