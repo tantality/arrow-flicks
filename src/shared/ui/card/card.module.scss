@@ -1,3 +1,4 @@
+/* stylelint-disable media-feature-range-notation */
 .card {
   background-color: var(--card-bg-color);
 }
@@ -8,4 +9,11 @@
 
 .lg {
   padding: 1.5rem;
+}
+
+
+@media (max-width: 500px) {
+  .lg {
+    padding: 1rem;
+  }
 }

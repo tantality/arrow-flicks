@@ -1,3 +1,4 @@
+/* stylelint-disable media-feature-range-notation */
 .movieCardDescriptionList {
   display: grid;
   grid-template-columns: max-content 1fr;
@@ -19,4 +20,30 @@
 .lg {
   grid-template-columns: 140px 1fr;
   align-items: center;
+}
+
+.md{
+  .itemValue{
+    width: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+@media (max-width: 1000px) {
+  .md {
+    .itemValue{
+      white-space: wrap;
+      text-overflow: unset;
+    }
+  }
+}
+
+
+@media (max-width: 768px) {
+  .lg {
+    grid-template-columns: 0.4fr 1fr;
+    column-gap: 1.5rem;
+  }
 }
