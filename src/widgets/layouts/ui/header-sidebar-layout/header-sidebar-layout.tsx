@@ -22,7 +22,7 @@ export const HeaderSidebarLayout = memo((props: HeaderSidebarLayoutProps) => {
     ...otherProps
   } = props;
 
-  const matches = useMediaQuery("(max-width: 1000px)");
+  const matches = useMediaQuery("(max-width: 1200px)");
 
   const clonedSidebar = cloneElement(sidebar, { className: cls.layoutSidebar });
   const clonedHeader = cloneElement(header, { className: cls.layoutHeader });

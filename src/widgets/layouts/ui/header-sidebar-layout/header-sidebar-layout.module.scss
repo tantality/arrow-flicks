@@ -1,3 +1,4 @@
+/* stylelint-disable media-feature-range-notation */
 /* stylelint-disable declaration-block-no-redundant-longhand-properties */
 .headerSidebarLayout {
   display: grid;
@@ -26,4 +27,18 @@
 .pageContainer {
   margin: 0 auto;
   height: 100%;
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  .layoutPage {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .pageContainer {
+    padding: 0;
+  }
 }
