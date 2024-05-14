@@ -7,6 +7,7 @@ import { TextButton } from "@/shared/ui/text-button";
 import { RatedMovie } from "../../types/movie-rating";
 import { useRatedMoviesDispatch } from "../../hooks/use-rated-movies-dispatch";
 import { ratedMoviesActions } from "../../model/actions/rated-movies";
+import { useMediaQuery } from "@mantine/hooks";
 
 interface RateMovieModalProps extends ModalProps {
   className?: string;
@@ -31,6 +32,8 @@ export const RateMovieModal = memo((props: RateMovieModalProps) => {
     onClose();
   }, [dispatch, movie, onClose]);
 
+  const matches = useMediaQuery("(max-width: 450px)");
+
   return (
     <Modal
       className={classNames(cls.rateMovieModal, {}, [className])}
@@ -44,7 +47,7 @@ export const RateMovieModal = memo((props: RateMovieModalProps) => {
         <div className={cls.movieTitle}>{movie.original_title}</div>
         <Rating
           className={cls.rating}
-          size="lg"
+          size={matches ? "sm" : "lg"}
           count={10}
           value={currentRating}
           onChange={setCurrentRating}
