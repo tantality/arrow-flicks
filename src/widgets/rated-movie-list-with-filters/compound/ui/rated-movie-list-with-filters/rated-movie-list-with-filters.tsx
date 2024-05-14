@@ -1,5 +1,6 @@
 import { classNames } from "@/shared/lib/classNames/classNames";
 import { memo } from "react";
+import cls from "./rated-movie-list-with-filters.module.scss";
 import { useRatedMovies } from "@/features/movie-rating";
 import { NoRatedMoviesScreen } from "@/widgets/rated-movie-list-with-filters/ui/no-rated-movies-screen/no-rated-movies-screen";
 import { Group, Stack, Title } from "@mantine/core";
@@ -26,9 +27,9 @@ export const RatedMovieListWithFilters = memo(
         className={classNames("", {}, [className])}
         {...otherProps}
       >
-        <Group justify="flex-start" grow>
+        <Group className={cls.header} justify="space-between">
           <Title order={1}>Rated movies</Title>
-          <MovieFilters />
+          <MovieFilters className={cls.filters} />
         </Group>
         <PaginatedMovieList />
       </Stack>

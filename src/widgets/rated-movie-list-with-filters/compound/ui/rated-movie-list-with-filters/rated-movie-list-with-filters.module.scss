@@ -1,0 +1,16 @@
+/* stylelint-disable media-feature-range-notation */
+.header {
+  .filters {
+    flex-grow: 1;
+    max-width: 490px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .header {
+    .filters {
+      max-width: initial;
+    }
+  }
+}
