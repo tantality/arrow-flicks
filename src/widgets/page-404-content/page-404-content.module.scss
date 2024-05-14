@@ -1,0 +1,36 @@
+/* stylelint-disable media-feature-range-notation */
+.page404Content {
+  row-gap: 3rem;
+
+  .svgWrapper {
+    width: 656px;
+  }
+}
+
+@media (max-width: 850px) {
+  .page404Content {
+    .svgWrapper {
+      width: 556px;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .page404Content {
+    row-gap: 2rem;
+
+    .svgWrapper {
+      width: 400px;
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .page404Content {
+    row-gap: 1.5rem;
+    
+    .svgWrapper {
+      width: 300px;
+    }
+  }
+}
