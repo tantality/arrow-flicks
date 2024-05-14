@@ -48,7 +48,7 @@ export const PaginatedMovieList = memo((props: PaginatedMovieListProps) => {
     >
       <Grid className={cls.list} gutter={"1rem"}>
         {data.results.map((movie) => (
-          <GridCol span={6} key={movie.id}>
+          <GridCol span={{ lg: 6, md: 6, sm: 6, xs: 12 }} key={movie.id}>
             <MovieRatingCard
               isTitleLink={true}
               className={cls.movieCard}

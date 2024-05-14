@@ -1,5 +1,15 @@
+/* stylelint-disable media-feature-range-notation */
 .paginatedMovieList {
   .pagination {
     align-self: flex-end;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .paginatedMovieList {
+    .pagination {
+      align-self: center;
+    }
   }
 }

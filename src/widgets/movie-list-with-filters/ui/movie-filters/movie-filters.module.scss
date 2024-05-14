@@ -1,5 +1,7 @@
+/* stylelint-disable media-feature-range-notation */
 .movieFilters {
   .filters {
+    --group-justify: flex-end !important;
     --group-wrap: nowrap;
 
     .genreDropdown,
@@ -10,20 +12,63 @@
 
     .ratingInputs {
       --group-wrap: nowrap;
-      
+
       max-width: max-content;
 
-      .ratingInput{
+      .ratingInput {
         max-width: 138px;
         flex-grow: 1;
       }
     }
   }
 
-  .sortByDropdown{
+  .sortByDropdown {
     max-width: 284px;
     align-self: flex-end;
     flex-grow: 1;
     width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .movieFilters {
+    .filters {
+      --group-justify: flex-start !important;
+
+      .genreDropdown,
+      .releaseYearDropdown {
+        max-width: 100%;
+        flex-basis: 35%;
+        min-width: 200px;
+      }
+
+      .ratingInputs {
+        & :global(.mantine-Group-root) {
+          --group-wrap: nowrap !important;
+        }
+
+        .ratingInput {
+          max-width: 200px;
+          flex-grow: 1;
+        }
+      }
+    }
+
+    .sortByDropdown {
+      max-width: 350px;
+      align-self: flex-end;
+      flex-basis: 50%;
+      flex-grow: 1;
+    }
+  }
+}
+
+@media (max-width: 455px) {
+  .movieFilters {
+    .sortByDropdown {
+      max-width: initial;
+      flex-basis: 100%;
+      flex-grow: 1;
+    }
   }
 }
