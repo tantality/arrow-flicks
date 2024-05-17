@@ -11,7 +11,7 @@ type HederTheme = "transparent" | "light";
 interface HeaderProps {
   className?: string;
   theme?: HederTheme;
-  withMenu: boolean;
+  withMenu?: boolean;
 }
 
 export const Header = memo((props: HeaderProps) => {
