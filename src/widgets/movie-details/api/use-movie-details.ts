@@ -14,7 +14,7 @@ export const useMovieDetails = (movieId: number, options?: any) => {
 };
 
 const getMovieDetailsById = async (id: number): Promise<MovieDetailsDto> => {
-  const res = await axiosInstance.get<MovieDetailsDto>(`movie/${id}`, {
+  const res = await axiosInstance.get<MovieDetailsDto>(`/api/proxy/movie/${id}`, {
     params: {
       append_to_response: "videos",
     },

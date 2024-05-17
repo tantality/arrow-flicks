@@ -9,7 +9,7 @@ import { setGenresAction } from "../model/actions/movie-genres/set-genres";
 
 const getMovieGenres = async (): Promise<MovieGenresDto> => {
   const res = await axiosInstance.get<MovieGenresDto>(
-    "genre/movie/list?language=en"
+    "/api/proxy/genre/movie/list?language=en"
   );
   return res.data;
 };
