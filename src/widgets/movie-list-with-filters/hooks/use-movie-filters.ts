@@ -1,122 +1,136 @@
-import { MouseEvent, useCallback, useContext, useMemo } from "react";
-import {
-  MovieFiltersContext,
-  MovieFiltersState,
-} from "../model/contexts/movie-filters";
-import { useMovieFiltersDispatch } from "./use-movie-filters-dispatch";
-import { movieFiltersActions } from "../model/actions/movie-filters";
+import { MouseEvent, useCallback, useEffect, useMemo } from "react";
 import { doesObjContainEmptyProperties } from "../lib/does-obj-contain-empty-properties";
-import { useDebouncedCallback } from "@mantine/hooks";
 import { usePaginationPage } from "@/app/providers/PaginationPageProvider";
+import {
+  MovieFiltersYup,
+} from "../model/validations/movie-filters-schema";
+import {
+  Control,
+  FieldErrors,
+  useFormContext,
+} from "react-hook-form";
+import { useDebouncedCallback } from "@mantine/hooks";
 
 interface UseMovieFiltersType {
-  data: MovieFiltersState;
+  data: MovieFiltersYup;
   setGenreId: (value: string | null) => void;
-  setSortBy: (value: string | null) => void;
+  setSortBy: (value: any) => void;
   setReleaseYear: (value: string | null) => void;
-  setFromRating: (value: string | number) => void;
-  setToRating: (value: string | number) => void;
+  setFromRating: (value: any) => void;
+  setToRating: (value: any) => void;
   resetFilters: (e?: MouseEvent<HTMLButtonElement>) => void;
-  dispatchNoFilterResultsAction: () => void;
   areFiltersEmpty: boolean;
+  control: Control<MovieFiltersYup>;
+  clientValidationErrors: FieldErrors<MovieFiltersYup>;
+  areThereClientValidationErrors: boolean;
 }
 
-const delay = 1000;
+const delay = 1200;
 
 export const useMovieFilters = (): UseMovieFiltersType => {
-  const data = useContext(MovieFiltersContext) as MovieFiltersState;
-  const dispatch = useMovieFiltersDispatch();
   const { setPage } = usePaginationPage();
 
-  const filters = useMemo(() => {
-    const { sortBy, noFilterResults, ...filters } = data;
-    return filters;
-  }, [data.genreId, data.releaseYear, data.fromRating, data.toRating]);
+  const {
+    control,
+    reset,
+    setValue,
+    formState: { errors: clientValidationErrors },
+    trigger,
+    watch,
+    getValues,
+  } = useFormContext<MovieFiltersYup>();
+
+  useEffect(() => {
+    trigger("fromRating");
+  }, [watch("toRating")]);
+
+  useEffect(() => {
+    trigger("toRating");
+  }, [watch("fromRating")]);
+
+  const { sortBy, ...filters } = getValues();
 
   const areFiltersEmpty = useMemo(
     () => doesObjContainEmptyProperties(filters),
-    [filters]
+    [watch("genreId"), watch("releaseYear"), watch("toRating"), watch("fromRating"), watch("sortBy")]
+  );
+
+  const validationErrorAmount = Object.keys(clientValidationErrors).length;
+
+  const areThereClientValidationErrors = useMemo(
+    () => validationErrorAmount !== 0,
+    [validationErrorAmount]
   );
 
   const setGenreId = useCallback(
     (value: string | null) => {
-      if (data.noFilterResults) {
-        dispatch(movieFiltersActions.setNoFilterResults(false));
-      }
-      dispatch(movieFiltersActions.setGenreIdAction(value));
+      setValue("genreId", value);
       setPage(1);
     },
-    [data.noFilterResults]
+    [control.getFieldState("genreId")]
   );
 
   const setSortBy = useCallback(
-    (value: string | null) => {
-      if (data.noFilterResults) {
-        dispatch(movieFiltersActions.setNoFilterResults(false));
-      }
-      dispatch(movieFiltersActions.setSortByAction(value));
+    (value: any) => {
+      console.log('value',value)
+      setValue("sortBy", value);
       setPage(1);
     },
-    [data.noFilterResults]
+    [control.getFieldState("sortBy")]
   );
 
   const setReleaseYear = useCallback(
     (value: string | null) => {
-      if (data.noFilterResults) {
-        dispatch(movieFiltersActions.setNoFilterResults(false));
-      }
-      dispatch(movieFiltersActions.setReleaseYearAction(value));
+      setValue("releaseYear", value);
       setPage(1);
     },
-    [data.noFilterResults]
+    [control.getFieldState("releaseYear")]
   );
 
   const setFromRating = useDebouncedCallback(
     useCallback(
-      (value: string | number) => {
-        if (data.noFilterResults) {
-          dispatch(movieFiltersActions.setNoFilterResults(false));
-        }
-        dispatch(movieFiltersActions.setFromRatingAction(value));
+      (value: any) => {
+        setValue("fromRating", value);
         setPage(1);
       },
-      [data.noFilterResults]
+      [control.getFieldState("fromRating")]
     ),
     delay
   );
 
   const setToRating = useDebouncedCallback(
     useCallback(
-      (value: string | number) => {
-        if (data.noFilterResults) {
-          dispatch(movieFiltersActions.setNoFilterResults(false));
-        }
-        dispatch(movieFiltersActions.setToRatingAction(value));
+      (value: any) => {
+        setValue("toRating", value);
         setPage(1);
       },
-      [data.noFilterResults]
+      [control.getFieldState("toRating")]
     ),
     delay
   );
 
-  const resetFilters = useCallback((e?: MouseEvent<HTMLButtonElement>) => {
-    dispatch(movieFiltersActions.resetFiltersAction());
+  const resetFilters = useCallback(() => {
+    reset({
+      genreId: null,
+      releaseYear: null,
+      fromRating: "" as unknown as number,
+      toRating: "" as unknown as number,
+      sortBy: getValues().sortBy,
+    });
     setPage(1);
   }, []);
 
-  const dispatchNoFilterResultsAction = useCallback(() => {
-    dispatch(movieFiltersActions.setNoFilterResults(true));
-  }, []);
-
   return {
-    data,
+    data: getValues(),
+    areFiltersEmpty,
+    control,
     setGenreId,
-    setSortBy,
     setReleaseYear,
     setFromRating,
     setToRating,
+    setSortBy,
     resetFilters,
-    dispatchNoFilterResultsAction,
-    areFiltersEmpty,
+    clientValidationErrors,
+    areThereClientValidationErrors,
   };
 };
