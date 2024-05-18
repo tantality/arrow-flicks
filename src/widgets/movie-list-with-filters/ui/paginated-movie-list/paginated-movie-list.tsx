@@ -1,6 +1,6 @@
 import { classNames } from "@/shared/lib/classNames/classNames";
 import cls from "./paginated-movie-list.module.scss";
-import { memo, useState } from "react";
+import { memo } from "react";
 import { Grid, GridCol, Stack } from "@mantine/core";
 import { useMovieFilters } from "../../hooks/use-movie-filters";
 import { useMoviesQuery } from "../../api/use-movies-query";
@@ -23,13 +23,15 @@ export const PaginatedMovieList = memo((props: PaginatedMovieListProps) => {
   const { className, ...otherProps } = props;
 
   const { page, setPage } = usePaginationPage();
-  const { data: filters } = useMovieFilters();
-  const { data, isLoading } = useMoviesQuery(filters);
+
+  const { data, isLoading } = useMoviesQuery();
   const genres = useMovieGenres();
+
+  const { areThereClientValidationErrors } = useMovieFilters();
 
   const areThereNoResults = data && !data.results.length && !isLoading;
 
-  if (areThereNoResults || filters.noFilterResults) {
+  if (areThereNoResults || areThereClientValidationErrors) {
     return <NoFilteredMoviesScreen />;
   }
 
