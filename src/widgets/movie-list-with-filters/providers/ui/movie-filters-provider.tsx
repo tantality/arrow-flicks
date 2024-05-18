@@ -1,19 +1,11 @@
+import { MovieSortByValues } from "@/features/movie-sort-by-dropdown";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm, FormProvider } from "react-hook-form";
+import { ReactNode } from "react";
 import {
-  MovieFiltersContext,
-  MovieFiltersDispatchContext,
-  MovieFiltersState,
-} from "../../model/contexts/movie-filters";
-import { movieFiltersReducer } from "../../model/reducers/movie-filters";
-import { ReactNode, useReducer } from "react";
-
-export const initialData: MovieFiltersState = {
-  genreId: undefined,
-  releaseYear: undefined,
-  fromRating: undefined,
-  toRating: undefined,
-  sortBy: "popularity.desc",
-  noFilterResults: false,
-};
+  MovieFiltersYup,
+  movieFiltersSchema,
+} from "../../model/validations/movie-filters-schema";
 
 interface MovieFiltersProviderProps {
   children: ReactNode;
@@ -22,13 +14,13 @@ interface MovieFiltersProviderProps {
 export const MovieFiltersProvider = ({
   children,
 }: MovieFiltersProviderProps) => {
-  const [data, dispatch] = useReducer(movieFiltersReducer, initialData);
+  const methods = useForm<MovieFiltersYup>({
+    mode: "all",
+    resolver: yupResolver(movieFiltersSchema),
+    defaultValues: {
+      sortBy: MovieSortByValues.PopularityDesc,
+    },
+  });
 
-  return (
-    <MovieFiltersContext.Provider value={data}>
-      <MovieFiltersDispatchContext.Provider value={dispatch}>
-        {children}
-      </MovieFiltersDispatchContext.Provider>
-    </MovieFiltersContext.Provider>
-  );
+  return <FormProvider {...methods}>{children}</FormProvider>;
 };
