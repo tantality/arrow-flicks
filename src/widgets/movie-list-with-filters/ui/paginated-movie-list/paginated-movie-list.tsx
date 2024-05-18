@@ -27,11 +27,11 @@ export const PaginatedMovieList = memo((props: PaginatedMovieListProps) => {
   const { data, isLoading, isError } = useMoviesQuery();
   const genres = useMovieGenres();
 
-  const { areThereClientValidationErrors } = useMovieFilters();
+  const { areThereValidationErrors } = useMovieFilters();
 
   const areThereNoResults = data && !data.results.length && !isLoading;
 
-  if (areThereNoResults || areThereClientValidationErrors || isError) {
+  if (areThereNoResults || areThereValidationErrors || isError) {
     return <NoFilteredMoviesScreen />;
   }
 

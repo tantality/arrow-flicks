@@ -19,8 +19,8 @@ interface UseMovieFiltersType {
   areFiltersEmpty: boolean;
   setErrors: (errorMessage: MovieFiltersErrors) => void;
   control: Control<MovieFiltersYup>;
-  clientValidationErrors: FieldErrors<MovieFiltersYup>;
-  areThereClientValidationErrors: boolean;
+  validationErrors: FieldErrors<MovieFiltersYup>;
+  areThereValidationErrors: boolean;
 }
 
 const delay = 1200;
@@ -32,7 +32,7 @@ export const useMovieFilters = (): UseMovieFiltersType => {
     control,
     reset,
     setValue,
-    formState: { errors: clientValidationErrors },
+    formState: { errors: validationErrors },
     trigger,
     watch,
     getValues,
@@ -72,9 +72,9 @@ export const useMovieFilters = (): UseMovieFiltersType => {
     ]
   );
 
-  const validationErrorAmount = Object.keys(clientValidationErrors).length;
+  const validationErrorAmount = Object.keys(validationErrors).length;
 
-  const areThereClientValidationErrors = useMemo(
+  const areThereValidationErrors = useMemo(
     () => validationErrorAmount !== 0,
     [validationErrorAmount]
   );
@@ -165,7 +165,7 @@ export const useMovieFilters = (): UseMovieFiltersType => {
     setSortBy,
     resetFilters,
     setErrors,
-    clientValidationErrors,
-    areThereClientValidationErrors,
+    validationErrors,
+    areThereValidationErrors,
   };
 };

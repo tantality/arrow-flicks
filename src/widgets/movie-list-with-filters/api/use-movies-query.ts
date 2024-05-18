@@ -11,7 +11,7 @@ import { BadRequestTypes } from "@/shared/const/api";
 type UseQueryResultType<T, E = Error> = UseQueryResult<T, E>;
 
 export const useMoviesQuery = (): UseQueryResultType<MoviesDto> => {
-  const { data, areThereClientValidationErrors, setErrors } = useMovieFilters();
+  const { data, areThereValidationErrors, setErrors } = useMovieFilters();
   const { page } = usePaginationPage();
 
   const queryParams = mapFiltersToMoviesQueryParams(data, page);
@@ -28,10 +28,10 @@ export const useMoviesQuery = (): UseQueryResultType<MoviesDto> => {
     ],
     queryFn: () => getMovies(queryParams),
     staleTime: Infinity,
-    enabled: !areThereClientValidationErrors,
+    enabled: !areThereValidationErrors,
   });
 
-  if (areThereClientValidationErrors) {
+  if (areThereValidationErrors) {
     return { data: undefined } as UseQueryResultType<MoviesDto>;
   }
 

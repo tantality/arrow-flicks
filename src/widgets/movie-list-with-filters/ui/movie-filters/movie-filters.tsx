@@ -21,7 +21,7 @@ export const MovieFilters = memo((props: MovieFiltersProps) => {
   const {
     data,
     control,
-    clientValidationErrors,
+    validationErrors,
     resetFilters,
     setGenreId,
     setReleaseYear,
@@ -47,7 +47,7 @@ export const MovieFilters = memo((props: MovieFiltersProps) => {
           onChange={setGenreId}
           name="genreId"
           control={control}
-          error={clientValidationErrors.genreId?.message}
+          error={validationErrors.genreId?.message}
         />
         <MovieReleaseYearDropdown<MovieFiltersYup>
           className={cls.releaseYearDropdown}
@@ -55,7 +55,7 @@ export const MovieFilters = memo((props: MovieFiltersProps) => {
           onChange={setReleaseYear}
           name="releaseYear"
           control={control}
-          error={clientValidationErrors.releaseYear?.message}
+          error={validationErrors.releaseYear?.message}
         />
         <Stack className={cls.ratingInputs} gap={16}>
           <InputWrapper id="rating-inputs" label="Ratings">
@@ -68,7 +68,7 @@ export const MovieFilters = memo((props: MovieFiltersProps) => {
                 id="input-demo"
                 value={data.fromRating}
                 onChange={setFromRating}
-                error={clientValidationErrors.fromRating?.message}
+                error={validationErrors.fromRating?.message}
               />
               <NumberInput<MovieFiltersYup>
                 className={cls.ratingInput}
@@ -78,7 +78,7 @@ export const MovieFilters = memo((props: MovieFiltersProps) => {
                 control={control}
                 value={data.toRating}
                 onChange={setToRating}
-                error={clientValidationErrors.toRating?.message}
+                error={validationErrors.toRating?.message}
               />
             </Group>
           </InputWrapper>
@@ -97,7 +97,7 @@ export const MovieFilters = memo((props: MovieFiltersProps) => {
         onChange={setSortBy}
         name="sortBy"
         control={control}
-        error={clientValidationErrors.sortBy?.message}
+        error={validationErrors.sortBy?.message}
       />
     </Stack>
   );
