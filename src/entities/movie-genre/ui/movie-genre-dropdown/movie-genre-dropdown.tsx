@@ -3,14 +3,20 @@ import { memo } from "react";
 import { InputWrapper } from "@/shared/ui/form/input-wrapper";
 import { Dropdown } from "@/shared/ui/dropdown";
 import { useMovieGenresQuery } from "../../api/use-movie-genres-query";
+import { Control, FieldPath, FieldValues } from "react-hook-form";
 
-interface MovieGenreDropdownProps {
+interface MovieGenreDropdownProps<T extends FieldValues> {
   className?: string;
   value?: string | null;
   onChange?: (value: string | null) => void;
+  error?: string;
+  name?: FieldPath<T>;
+  control?: Control<T>;
 }
 
-export const MovieGenreDropdown = memo((props: MovieGenreDropdownProps) => {
+const CustomMovieGenreDropdown = <T extends FieldValues>(
+  props: MovieGenreDropdownProps<T>
+) => {
   const { className } = props;
 
   const { data, isLoading, error } = useMovieGenresQuery();
@@ -33,4 +39,8 @@ export const MovieGenreDropdown = memo((props: MovieGenreDropdownProps) => {
       />
     </InputWrapper>
   );
-});
+};
+
+export const MovieGenreDropdown = memo(
+  CustomMovieGenreDropdown
+) as typeof CustomMovieGenreDropdown;
