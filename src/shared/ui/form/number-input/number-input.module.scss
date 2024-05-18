@@ -1,31 +1,32 @@
 .numberInput {
   :global(.mantine-NumberInput-wrapper) {
     &:hover {
-      :global(.mantine-NumberInput-input) {
+      :global(.mantine-NumberInput-input):not([data-error]) {
         border-color: var(--hover-input-border-color);
       }
     }
 
     &:focus {
-      :global(.mantine-NumberInput-input) {
+      :global(.mantine-NumberInput-input):not([data-error]) {
         border-color: var(--focus-input-border-color);
       }
     }
   }
 
-  :global(.mantine-NumberInput-error){
+  :global(.mantine-NumberInput-error) {
     font-size: 10px;
   }
 
   :global(.mantine-NumberInput-input) {
     padding-left: 12px;
     font: var(--text-base-s-regular-font);
-    border-color: var(--form-item-border-color);
     background-color: var(--form-item-bg-color);
     caret-color: var(--input-caret-color);
 
     &:focus {
-      border-color: var(--focus-input-border-color);
+      &:not([data-error]) {
+        border-color: var(--focus-input-border-color);
+      }
     }
 
     &::placeholder {
