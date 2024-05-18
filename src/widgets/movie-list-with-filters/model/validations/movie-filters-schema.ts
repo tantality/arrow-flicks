@@ -38,3 +38,5 @@ export const movieFiltersSchema = Yup.object().shape({
 });
 
 export type MovieFiltersYup = Yup.InferType<typeof movieFiltersSchema>;
+export type MovieFiltersFields = keyof MovieFiltersYup; 
+export type MovieFiltersErrors = Partial<Record<MovieFiltersFields, string>>
