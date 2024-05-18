@@ -2,6 +2,7 @@
 .movieFilters {
   .filters {
     --group-justify: flex-end !important;
+    --group-align: flex-start !important;
     --group-wrap: nowrap;
 
     .genreDropdown,
@@ -24,6 +25,19 @@
         flex-grow: 1;
       }
     }
+
+    &:has(:global(.mantine-InputWrapper-error)) {
+      .resetButton {
+        align-self: flex-start;
+        position: relative;
+        top: 30.5px;
+      }
+    }
+
+    /* stylelint-disable-next-line no-descending-specificity */
+    .resetButton {
+      align-self: flex-end;
+    }
   }
 
   .sortByDropdown {
@@ -34,10 +48,28 @@
   }
 }
 
+@media (max-width: 990px) {
+  .movieFilters {
+    .filters {
+      &:has(:global(.mantine-InputWrapper-error)) {
+        .resetButton {
+          top: 0;
+        }
+      }
+    }
+  }
+}
+
 @media (max-width: 900px) {
   .movieFilters {
     .filters {
       --group-justify: flex-start !important;
+
+      &:has(:global(.mantine-InputWrapper-error)) {
+        .resetButton {
+          top: 30.5px;
+        }
+      }
 
       .genreDropdown,
       .releaseYearDropdown {
@@ -63,6 +95,19 @@
       align-self: flex-end;
       flex-basis: 50%;
       flex-grow: 1;
+    }
+  }
+}
+
+@media(max-width:545px){
+  .movieFilters {
+    .filters {
+      &:has(:global(.mantine-InputWrapper-error)) {
+        .resetButton {
+          position: static;
+          align-self: flex-start;
+        }
+      }
     }
   }
 }

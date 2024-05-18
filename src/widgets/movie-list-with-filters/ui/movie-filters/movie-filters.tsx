@@ -83,7 +83,11 @@ export const MovieFilters = memo((props: MovieFiltersProps) => {
             </Group>
           </InputWrapper>
         </Stack>
-        <TextButton onClick={resetFilters} disabled={areFiltersEmpty}>
+        <TextButton
+          className={cls.resetButton}
+          onClick={resetFilters}
+          disabled={areFiltersEmpty}
+        >
           Reset filters
         </TextButton>
       </Group>
