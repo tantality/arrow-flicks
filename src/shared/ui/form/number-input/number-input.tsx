@@ -1,3 +1,4 @@
+import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
 import { classNames } from "../../../lib/classNames/classNames";
 import cls from "./number-input.module.scss";
 import {
@@ -16,14 +17,37 @@ type PickedMantineNumberInputProps = Pick<
   | "onChange"
   | "style"
   | "id"
+  | "error"
 >;
 
-interface NumberInputProps extends PickedMantineNumberInputProps {
+interface NumberInputProps<T extends FieldValues>
+  extends PickedMantineNumberInputProps {
   className?: string;
+  name?: FieldPath<T>;
+  control?: Control<T>;
 }
 
-export const NumberInput = memo((props: NumberInputProps) => {
-  const { className, ...otherProps } = props;
+const CustomNumberInput = <T extends FieldValues>(
+  props: NumberInputProps<T>
+) => {
+  const { className, control, name, ...otherProps } = props;
+
+  if (control && name) {
+    return (
+      <Controller
+        control={control}
+        name={name}
+        render={({ field }) => (
+          <MantineNumberInput
+            size="md"
+            className={classNames(cls.numberInput, {}, [className])}
+            {...otherProps}
+            {...field}
+          />
+        )}
+      />
+    );
+  }
 
   return (
     <MantineNumberInput
@@ -32,4 +56,6 @@ export const NumberInput = memo((props: NumberInputProps) => {
       {...otherProps}
     />
   );
-});
+};
+
+export const NumberInput = memo(CustomNumberInput) as typeof CustomNumberInput;

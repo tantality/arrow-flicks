@@ -13,6 +13,10 @@
     }
   }
 
+  :global(.mantine-NumberInput-error){
+    font-size: 10px;
+  }
+
   :global(.mantine-NumberInput-input) {
     padding-left: 12px;
     font: var(--text-base-s-regular-font);
