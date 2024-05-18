@@ -4,13 +4,14 @@ import { MoviesDto, MoviesQueryParams } from "../model/types/movies";
 import { mapFiltersToMoviesQueryParams } from "../lib/map-filters-to-movies-query-params";
 import { usePaginationPage } from "@/app/providers/PaginationPageProvider";
 import { useMovieFilters } from "../hooks/use-movie-filters";
+import { AxiosError } from "axios";
+import { MovieFiltersErrors } from "../model/validations/movie-filters-schema";
+import { BadRequestTypes } from "@/shared/const/api";
 
 type UseQueryResultType<T, E = Error> = UseQueryResult<T, E>;
 
-export const useMoviesQuery = (
-): UseQueryResultType<MoviesDto>=> {
-
-  const { data, areThereClientValidationErrors } = useMovieFilters();
+export const useMoviesQuery = (): UseQueryResultType<MoviesDto> => {
+  const { data, areThereClientValidationErrors, setErrors } = useMovieFilters();
   const { page } = usePaginationPage();
 
   const queryParams = mapFiltersToMoviesQueryParams(data, page);
@@ -27,8 +28,20 @@ export const useMoviesQuery = (
     ],
     queryFn: () => getMovies(queryParams),
     staleTime: Infinity,
-    enabled : !areThereClientValidationErrors
+    enabled: !areThereClientValidationErrors,
   });
+
+  if (areThereClientValidationErrors) {
+    return { data: undefined } as UseQueryResultType<MoviesDto>;
+  }
+
+  if (queryRes.error instanceof AxiosError) {
+    const error = queryRes.error;
+    if (error.response?.data?.type === BadRequestTypes.InvalidFilters) {
+      const errorMessage = error.response.data.error as MovieFiltersErrors;
+      setErrors(errorMessage);
+    }
+  }
 
   return queryRes;
 };
