@@ -38,8 +38,8 @@ interface MovieCardProps {
   rateMovieButton?: ReactNode;
 }
 
-const API_IMG_URL_L = `${APT_IMG_URL}/w342`;
-const API_IMG_URL_S_M = `${APT_IMG_URL}/w154`;
+const API_IMG_URL_L = `${APT_IMG_URL}/w342/`;
+const API_IMG_URL_S_M = `${APT_IMG_URL}/w154/`;
 
 export const MovieCard = memo((props: MovieCardProps) => {
   const {
@@ -101,7 +101,9 @@ export const MovieCard = memo((props: MovieCardProps) => {
         alt={original_title}
         height={170}
         width={119}
-        placeholder={<NoPosterSImg alt="poster-placeholder" />}
+        placeholder={
+          <NoPosterSImg height={170} width={119} alt="poster-placeholder" />
+        }
         loadingComp={<Skeleton height={170} width={119} radius={0} />}
       />
     );
@@ -112,7 +114,7 @@ export const MovieCard = memo((props: MovieCardProps) => {
       size={CardSize.L}
     >
       <Group gap={"1rem"} className={cls.container}>
-        <div className={cls.poster}>{img}</div>
+        {img}
         <Stack className={cls.body} justify="space-between">
           <Group className={cls.header}>
             <Stack gap={"0.5rem"}>

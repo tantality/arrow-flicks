@@ -6,6 +6,10 @@
   .container {
     --group-align: space-between !important;
     --group-wrap: nowrap !important;
+    
+    svg, img{
+      flex-shrink: 0;
+    }
 
     .body {
       flex-grow: 1;
