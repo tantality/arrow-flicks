@@ -1,52 +1,57 @@
 import { DropdownOption } from "@/shared/types/dropdown-option.type";
 
+export enum MovieSortByValues{ 
+  PopularityDesc = "popularity.desc",
+  PopularityAsc = "popularity.asc",
+  VoteAverageDesc = "vote_average.desc",
+  VoteAverageAsc = "vote_average.asc",
+  VoteCountDesc = "vote_count.desc",
+  VoteCountAsc = "vote_count.asc",
+  RevenueDesc = "revenue.desc",
+  RevenueAsc = "revenue.asc",
+  PrimaryReleaseDateDesc = "primary_release_date.desc",
+  PrimaryReleaseDateAsc = "primary_release_date.asc",
+}
+
 export const movieSortByDropdownOptions: DropdownOption[] = [
   {
-    value: "popularity.desc",
+    value: MovieSortByValues.PopularityDesc,
     label: "Most popular",
   },
   {
-    value: "popularity.asc",
+    value: MovieSortByValues.PopularityAsc,
     label: "Least Popular",
   },
   {
-    value: "vote_average.desc",
+    value: MovieSortByValues.VoteAverageDesc,
     label: "Most Rated",
   },
   {
-    value: "vote_average.asc",
+    value: MovieSortByValues.VoteAverageAsc,
     label: "Least Rated",
   },
   {
-    value: "vote_count.desc",
+    value:  MovieSortByValues.VoteCountDesc,
     label: "Most Voted",
   },
   {
-    value: "vote_count.asc",
+    value: MovieSortByValues.VoteCountAsc,
     label: "Least Voted",
   },
   {
-    value: "revenue.desc",
+    value: MovieSortByValues.RevenueDesc,
     label: "Most Profitable",
   },
   {
-    value: "revenue.asc",
+    value: MovieSortByValues.RevenueAsc,
     label: "Least Profitable",
   },
   {
-    value: "primary_release_date.desc",
+    value: MovieSortByValues.PrimaryReleaseDateDesc,
     label: "Most New",
   },
   {
-    value: "primary_release_date.asc",
+    value: MovieSortByValues.PrimaryReleaseDateAsc,
     label: "Least New",
   },
-  // {
-  //   value: "original_title.asc",
-  //   label: "Least",
-  // },
-  // {
-  //   value: "original_title.desc",
-  //   label: "Most",
-  // },
 ];
