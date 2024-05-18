@@ -7,7 +7,7 @@
     --group-align: space-between !important;
     --group-wrap: nowrap !important;
     
-    svg, img{
+    svg, img, :global(.mantine-Skeleton-root) {
       flex-shrink: 0;
     }
 
