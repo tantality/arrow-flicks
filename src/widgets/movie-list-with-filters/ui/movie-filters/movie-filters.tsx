@@ -9,6 +9,7 @@ import { NumberInput } from "@/shared/ui/form/number-input";
 import { TextButton } from "@/shared/ui/text-button";
 import { MovieSortByDropdown } from "@/features/movie-sort-by-dropdown";
 import { useMovieFilters } from "../../hooks/use-movie-filters";
+import { MovieFiltersYup } from "../../model/validations/movie-filters-schema";
 
 interface MovieFiltersProps {
   className?: string;
@@ -19,13 +20,15 @@ export const MovieFilters = memo((props: MovieFiltersProps) => {
 
   const {
     data,
-    areFiltersEmpty,
+    control,
+    clientValidationErrors,
+    resetFilters,
     setGenreId,
     setReleaseYear,
     setFromRating,
-    setToRating,
     setSortBy,
-    resetFilters,
+    setToRating,
+    areFiltersEmpty,
   } = useMovieFilters();
 
   return (
@@ -38,36 +41,44 @@ export const MovieFilters = memo((props: MovieFiltersProps) => {
         align="flex-end"
         {...otherProps}
       >
-        <MovieGenreDropdown
+        <MovieGenreDropdown<MovieFiltersYup>
           className={cls.genreDropdown}
           value={data.genreId}
           onChange={setGenreId}
+          name="genreId"
+          control={control}
+          error={clientValidationErrors.genreId?.message}
         />
-        <MovieReleaseYearDropdown
+        <MovieReleaseYearDropdown<MovieFiltersYup>
           className={cls.releaseYearDropdown}
           value={data.releaseYear}
           onChange={setReleaseYear}
+          name="releaseYear"
+          control={control}
+          error={clientValidationErrors.releaseYear?.message}
         />
         <Stack className={cls.ratingInputs} gap={16}>
           <InputWrapper id="rating-inputs" label="Ratings">
             <Group className="rating-inputs" gap={8}>
-              <NumberInput
+              <NumberInput<MovieFiltersYup>
+                control={control}
+                name="fromRating"
                 className={cls.ratingInput}
                 placeholder="From"
                 id="input-demo"
-                min={0}
-                max={10}
                 value={data.fromRating}
                 onChange={setFromRating}
+                error={clientValidationErrors.fromRating?.message}
               />
-              <NumberInput
+              <NumberInput<MovieFiltersYup>
                 className={cls.ratingInput}
                 placeholder="To"
                 id="input-demo"
-                min={0}
-                max={10}
+                name="toRating"
+                control={control}
                 value={data.toRating}
                 onChange={setToRating}
+                error={clientValidationErrors.toRating?.message}
               />
             </Group>
           </InputWrapper>
@@ -76,10 +87,13 @@ export const MovieFilters = memo((props: MovieFiltersProps) => {
           Reset filters
         </TextButton>
       </Group>
-      <MovieSortByDropdown
+      <MovieSortByDropdown<MovieFiltersYup>
         className={cls.sortByDropdown}
         value={data.sortBy}
         onChange={setSortBy}
+        name="sortBy"
+        control={control}
+        error={clientValidationErrors.sortBy?.message}
       />
     </Stack>
   );

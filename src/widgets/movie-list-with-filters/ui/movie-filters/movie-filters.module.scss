@@ -13,6 +13,10 @@
     .ratingInputs {
       --group-wrap: nowrap;
 
+      & :global(.mantine-Group-root) {
+        --group-align: flex-start !important;
+      }
+
       max-width: max-content;
 
       .ratingInput {
