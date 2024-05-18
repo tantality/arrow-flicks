@@ -1,8 +1,7 @@
 import { classNames } from "@/shared/lib/classNames/classNames";
-import { memo, useEffect } from "react";
+import { memo } from "react";
 import SearchGuyImg from "@/shared/assets/imgs/search-guy.svg";
 import { MessageScreen } from "@/features/message-screen";
-import { useMovieFilters } from "../../hooks/use-movie-filters";
 
 interface NoFilteredMoviesScreenProps {
   className?: string;
@@ -11,12 +10,6 @@ interface NoFilteredMoviesScreenProps {
 export const NoFilteredMoviesScreen = memo(
   (props: NoFilteredMoviesScreenProps) => {
     const { className, ...otherProps } = props;
-    const { resetFilters, dispatchNoFilterResultsAction } = useMovieFilters();
-
-    useEffect(() => {
-      resetFilters();
-      dispatchNoFilterResultsAction();
-    }, []);
 
     return (
       <MessageScreen
