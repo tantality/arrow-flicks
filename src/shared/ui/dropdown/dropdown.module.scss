@@ -1,6 +1,10 @@
 .dropdown {
   font: var(--text-base-s-regular-font);
 
+  :global(.mantine-Select-error){
+    font-size: 10px;
+  }
+
   :global(.mantine-Select-wrapper) {
     --input-height: 42px;
     --input-padding-inline-start:12px;

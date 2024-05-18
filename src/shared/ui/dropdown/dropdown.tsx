@@ -1,8 +1,9 @@
 import { classNames } from "../../lib/classNames/classNames";
 import cls from "./dropdown.module.scss";
-import { memo } from "react";
 import { Select, SelectProps } from "@mantine/core";
 import DownArrowIcon from "@/shared/assets/icons/down-arrow-m.svg";
+import { FieldValues, Control, Controller, FieldPath } from "react-hook-form";
+import { memo } from "react";
 
 type PickedMantineSelectProps = Pick<
   SelectProps,
@@ -13,16 +14,41 @@ type PickedMantineSelectProps = Pick<
   | "value"
   | "onChange"
   | "allowDeselect"
+  | "error"
 >;
 
-interface DropdownProps extends PickedMantineSelectProps {
+interface DropdownProps<T extends FieldValues>
+  extends PickedMantineSelectProps {
   className?: string;
+  name?: FieldPath<T>;
+  control?: Control<T>;
 }
 
-export const Dropdown = memo((props: DropdownProps) => {
-  const { className, data, ...otherProps } = props;
+const CustomDropdown = <T extends FieldValues>(props: DropdownProps<T>) => {
+  const { className, data, control, name, ...otherProps } = props;
 
   const comboBoxProps = { size: "md" };
+
+  if (control && name) {
+    return (
+      <Controller
+        control={control}
+        name={name}
+        render={({ field }) => (
+          <Select
+            withCheckIcon={false}
+            comboboxProps={comboBoxProps}
+            data={data}
+            className={classNames(cls.dropdown, {}, [className])}
+            rightSection={<DownArrowIcon />}
+            rightSectionWidth={48}
+            {...field}
+            {...otherProps}
+          />
+        )}
+      />
+    );
+  }
 
   return (
     <Select
@@ -35,4 +61,6 @@ export const Dropdown = memo((props: DropdownProps) => {
       {...otherProps}
     />
   );
-});
+};
+
+export const Dropdown = memo(CustomDropdown) as typeof CustomDropdown;
