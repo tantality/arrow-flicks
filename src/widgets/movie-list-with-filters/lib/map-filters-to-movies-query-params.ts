@@ -1,9 +1,9 @@
 import { isValueDefined } from "@/shared/lib/is-value-defined";
-import { MovieFiltersState } from "../model/contexts/movie-filters";
 import { MoviesQueryParams } from "../model/types/movies";
+import { MovieFiltersYup } from "../model/validations/movie-filters-schema";
 
 export const mapFiltersToMoviesQueryParams = (
-  filters: MovieFiltersState,
+  filters: MovieFiltersYup,
   page: number
 ): MoviesQueryParams => {
   const { toRating, fromRating, genreId, releaseYear, sortBy } = filters;
