@@ -23,6 +23,12 @@
 }
 
 .md{
+  &.skeleton{
+    .itemName{
+      width: 60px;
+    }
+  }
+
   .itemValue{
     width: auto;
     white-space: nowrap;
