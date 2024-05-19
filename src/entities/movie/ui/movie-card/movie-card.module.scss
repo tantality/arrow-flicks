@@ -40,6 +40,14 @@
   }
 }
 
+.skeleton{
+  .header {
+    .stack{
+      flex-grow: 1;
+    }
+  }
+}
+
 @media (max-width: 1000px) {
   .md {
     height: 100%;

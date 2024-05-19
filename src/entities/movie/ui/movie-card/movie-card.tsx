@@ -36,6 +36,7 @@ interface MovieCardProps {
   revenue?: number;
   runtime?: number;
   rateMovieButton?: ReactNode;
+  isLoading?: boolean;
 }
 
 const API_IMG_URL_L = `${APT_IMG_URL}/w342/`;
@@ -57,6 +58,7 @@ export const MovieCard = memo((props: MovieCardProps) => {
     revenue,
     runtime,
     rateMovieButton,
+    isLoading = false,
   } = props;
 
   const releaseYear = dayjs(release_date).isValid()
@@ -107,6 +109,65 @@ export const MovieCard = memo((props: MovieCardProps) => {
         loadingComp={<Skeleton height={170} width={119} radius={0} />}
       />
     );
+
+  if (isLoading) {
+    return (
+      <Card
+        className={classNames(cls.movieCard, {}, [
+          className,
+          cls[size],
+          cls.skeleton,
+        ])}
+        size={CardSize.L}
+      >
+        <Group gap={"1rem"} className={cls.container}>
+          <Skeleton
+            width={size === MovieCardSize.L ? "250px" : "119px"}
+            height={size === MovieCardSize.L ? "352px" : "170px"}
+          />
+          <Stack className={cls.body} justify="space-between">
+            <Group className={cls.header}>
+              <Stack gap={"0.5rem"} className={cls.stack}>
+                <Skeleton
+                  className={cls.title}
+                  width={"100%"}
+                  height={"24px"}
+                />
+                <Skeleton
+                  className={cls.releaseYear}
+                  width={"50px"}
+                  height={"20px"}
+                />
+                <Group className={cls.averagePeopleRating} gap={"0.5rem"}>
+                  <Group gap={"0.25rem"}>
+                    <Skeleton width={"28px"} height={"28px"} />
+                    <Skeleton
+                      className={cls.averageRating}
+                      width={"40px"}
+                      height={"28px"}
+                    />
+                  </Group>
+                  <Skeleton
+                    className={cls.peopleAmount}
+                    width={"60px"}
+                    height={"28px"}
+                  />
+                </Group>
+              </Stack>
+              {rateMovieButton ? (
+                <Skeleton width={"28px"} height={"28px"} />
+              ) : null}
+            </Group>
+            <MovieCardDescriptionList
+              items={[]}
+              cardSize={size}
+              isLoading={isLoading}
+            />
+          </Stack>
+        </Group>
+      </Card>
+    );
+  }
 
   return (
     <Card

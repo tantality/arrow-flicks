@@ -10,6 +10,7 @@ import { useMovieRating } from "../../hooks/use-movie-rating";
 
 interface MovieRatingCardProps {
   className?: string;
+  isLoading?: boolean;
   size?: MovieCardSize;
   isTitleLink?: boolean;
   id: number;
@@ -25,7 +26,13 @@ interface MovieRatingCardProps {
 }
 
 export const MovieRatingCard = memo((props: MovieRatingCardProps) => {
-  const { className, size, isTitleLink = false, ...movie } = props;
+  const {
+    className,
+    size,
+    isTitleLink = false,
+    isLoading = false,
+    ...movie
+  } = props;
   const [isModalOpened, setIsModalOpened] = useState(false);
 
   const movieRating = useMovieRating(movie.id);
@@ -46,6 +53,7 @@ export const MovieRatingCard = memo((props: MovieRatingCardProps) => {
   return (
     <>
       <MovieCard
+        isLoading={isLoading}
         isTitleLink={isTitleLink}
         size={size}
         className={classNames(cls.movieRatingCard, {}, [className])}
