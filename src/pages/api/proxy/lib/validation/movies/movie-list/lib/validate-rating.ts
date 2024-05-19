@@ -31,10 +31,10 @@ const validateFromRatingValue = (fromRating: QueryParam): string | null => {
     return "from value must be a number";
   }
 
-  const fromRatingIsBetween0and10 =
+  const isFromRatingBetween0and10 =
     fromRatingAsNumber >= MIN_RATING && fromRatingAsNumber <= MAX_RATING;
 
-  if (!fromRatingIsBetween0and10) {
+  if (!isFromRatingBetween0and10) {
     return `from value must be between ${MIN_RATING} and ${MAX_RATING}`;
   }
 
@@ -59,10 +59,10 @@ const validateToRatingValue = (
     return "to value must be a number";
   }
 
-  const toRatingIsBetween0and10 =
+  const isToRatingBetween0and10 =
     toRatingAsNumber >= MIN_RATING && toRatingAsNumber <= MAX_RATING;
 
-  if (!toRatingIsBetween0and10) {
+  if (!isToRatingBetween0and10) {
     return `to value must be between ${MIN_RATING} and ${MAX_RATING}`;
   }
 
@@ -70,7 +70,10 @@ const validateToRatingValue = (
     return null;
   }
 
-  if (fromRatingAsNumber > toRatingAsNumber) {
+  const isFromRatingBetween0and10 =
+    fromRatingAsNumber >= MIN_RATING && fromRatingAsNumber <= MAX_RATING;
+
+  if (isFromRatingBetween0and10 && fromRatingAsNumber > toRatingAsNumber) {
     return "to value must be grater than or equal to from value";
   }
 

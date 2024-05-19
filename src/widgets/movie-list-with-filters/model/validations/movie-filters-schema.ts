@@ -26,7 +26,11 @@ export const movieFiltersSchema = Yup.object().shape({
     .optional()
     .transform((value) => (Number.isNaN(value) ? undefined : value))
     .when("fromRating", ([fromRating], schema) => {
-      if (fromRating) {
+      const fromRatingAsNumber = Number(fromRating)
+      const isFromRatingNumber = !isNaN(fromRatingAsNumber);
+      const isFromRatingValidNumber =  isFromRatingNumber && fromRatingAsNumber>=0 && fromRatingAsNumber<=10;
+
+      if (isFromRatingValidNumber) {
         return schema.min(
           fromRating,
           "to value must be grater than or equal to from value"

@@ -9,15 +9,12 @@ export const mapFiltersToMoviesQueryParams = (
   const { toRating, fromRating, genreId, releaseYear, sortBy } = filters;
 
   const isGenreIdValid = isValueDefined(genreId) && !isNaN(Number(genreId));
-  const isReleaseYearValid = isValueDefined(releaseYear);
-  !isNaN(Number(releaseYear));
+  const isReleaseYearValid = isValueDefined(releaseYear) && !isNaN(Number(releaseYear));
 
   const isSortByValid = isValueDefined(sortBy);
-  const isToRatingValid = isValueDefined(toRating);
-  !isNaN(Number(toRating));
+  const isToRatingValid = isValueDefined(toRating) && !isNaN(Number(toRating));
 
-  const isFromRatingValid = isValueDefined(fromRating);
-  !isNaN(Number(fromRating));
+  const isFromRatingValid = isValueDefined(fromRating) && !isNaN(Number(fromRating));
 
   const queryParams = {
     ...(isGenreIdValid && { with_genres: [Number(genreId)] }),
