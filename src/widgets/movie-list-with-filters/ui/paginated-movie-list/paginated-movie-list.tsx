@@ -10,6 +10,7 @@ import { usePaginationPage } from "@/app/providers/PaginationPageProvider";
 import { NoFilteredMoviesScreen } from "../no-filtered-movies-screen/no-filtered-movies-screen";
 import { MovieList } from "../movie-list/movie-list";
 import { useScrollToTopOnPageChange } from "@/shared/hooks/use-scroll-to-top-on-page-change";
+import { DefaultErrorScreen } from "@/features/message-screen";
 
 interface PaginatedMovieListProps {
   className?: string;
@@ -19,15 +20,19 @@ export const PaginatedMovieList = memo((props: PaginatedMovieListProps) => {
   const { className, ...otherProps } = props;
 
   const { page, setPage } = usePaginationPage();
-  const { data, isLoading, isError } = useMoviesQuery();
+  const { data, isLoading, error } = useMoviesQuery();
   const { areThereValidationErrors } = useMovieFilters();
 
   useScrollToTopOnPageChange(page);
 
   const areThereNoResults = data && !data.results.length && !isLoading;
 
-  if (areThereNoResults || areThereValidationErrors || isError) {
+  if (areThereNoResults || areThereValidationErrors) {
     return <NoFilteredMoviesScreen />;
+  }
+
+  if (error) {
+    return <DefaultErrorScreen />;
   }
 
   let totalPages;
