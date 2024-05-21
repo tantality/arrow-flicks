@@ -19,15 +19,15 @@ export const useMoviesQuery = (): UseQueryResultType<MoviesDto> => {
   const queryRes = useQuery({
     queryKey: [
       "movies",
-      // data.sortBy,
-      // data.releaseYear,
-      // data.toRating,
-      // data.fromRating,
-      // data.genreId,
-      // page,
+      data.sortBy,
+      data.releaseYear,
+      data.toRating,
+      data.fromRating,
+      data.genreId,
+      page,
     ],
     queryFn: () => getMovies(queryParams),
-    // staleTime: Infinity,
+    staleTime: 0,
     enabled: !areThereValidationErrors,
   });
 
