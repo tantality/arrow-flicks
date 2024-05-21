@@ -1,6 +1,6 @@
 import { AppRoutes, getMoviesRoute, getRatedMoviesRoute } from "@/shared/const/router";
 
-type Routes = Exclude<keyof typeof AppRoutes, "MOVIE_DETAILS">;
+type Routes = Exclude<keyof typeof AppRoutes, "MOVIE_DETAILS" | "NOT_FOUND">;
 
 export const SidebarRoutes: Record<Routes, string> = {
   MOVIES: getMoviesRoute(),
