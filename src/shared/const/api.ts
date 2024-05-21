@@ -5,6 +5,7 @@ export const APT_URL = process.env.NEXT_PUBLIC_API_URL;
 export const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
 export const BAD_REQUEST_STATUS = 400;
+export const NOT_FOUND_STATUS = 404;
 
 export enum BadRequestTypes {
   InvalidFilters = "Invalid filters",
