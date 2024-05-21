@@ -27,7 +27,7 @@ export const useMoviesQuery = (): UseQueryResultType<MoviesDto> => {
       page,
     ],
     queryFn: () => getMovies(queryParams),
-    staleTime: 0,
+    staleTime: Infinity,
     enabled: !areThereValidationErrors,
   });
 

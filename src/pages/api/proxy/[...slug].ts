@@ -21,10 +21,10 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    const isRequestToGetMovieList = req.url?.includes("discover/movie");
-    if (isRequestToGetMovieList) {
-      validateMovieListQueryParams(req);
-    }
+    // const isRequestToGetMovieList = req.url?.includes("discover/movie");
+    // if (isRequestToGetMovieList) {
+    //   validateMovieListQueryParams(req);
+    // }
 
     return new Promise((resolve, reject) => {
       proxy(req, res, (err: any) => {
