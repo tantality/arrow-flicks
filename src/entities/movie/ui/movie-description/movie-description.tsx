@@ -22,6 +22,16 @@ export const MovieDescription = memo((props: MovieDescriptionProps) => {
   const { className, overview, trailer, production_companies, ...otherProps } =
     props;
 
+  const noCompanies =
+    !production_companies ||
+    (production_companies && !production_companies.length);
+
+  const noDataToDisplay = !overview && !trailer && noCompanies;
+
+  if (noDataToDisplay) {
+    return null;
+  }
+
   return (
     <Card
       size={CardSize.L}
