@@ -13,7 +13,6 @@ const proxy = createProxyMiddleware<NextApiRequest, NextApiResponse>({
   headers: {
     Authorization: `Bearer ${API_KEY}`,
   },
-  secure: false,
 });
 
 export default async function handler(
@@ -21,10 +20,10 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    // const isRequestToGetMovieList = req.url?.includes("discover/movie");
-    // if (isRequestToGetMovieList) {
-    //   validateMovieListQueryParams(req);
-    // }
+    const isRequestToGetMovieList = req.url?.includes("discover/movie");
+    if (isRequestToGetMovieList) {
+      validateMovieListQueryParams(req);
+    }
 
     return new Promise((resolve, reject) => {
       proxy(req, res, (err: any) => {
