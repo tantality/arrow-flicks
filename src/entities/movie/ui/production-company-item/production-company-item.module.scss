@@ -10,3 +10,9 @@
     font: var(--text-base-m-bold-font);
   }
 }
+
+.skeleton{
+  .logo {
+    flex-shrink: 0;
+  }
+}

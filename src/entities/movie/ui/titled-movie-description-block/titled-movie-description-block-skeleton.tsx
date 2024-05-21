@@ -16,7 +16,7 @@ export const TitledMovieDescriptionBlockSkeleton = memo(
       <Stack
         className={classNames(cls.titledMovieDescriptionBlock, {}, [className])}
       >
-        <Skeleton className={cls.title} {...otherProps} />
+        <Skeleton className={cls.title} {...otherProps} width="200px" />
         {children}
       </Stack>
     );

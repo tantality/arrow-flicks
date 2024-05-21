@@ -1,10 +1,12 @@
 .breadCrumbs {
   --mantine-color-anchor: var(--breadcrumb-text-color);
-  
+
   font: var(--text-base-s-regular-font);
   color: var(--breadcrumb-text-color);
+  white-space: normal;
 
   .link {
+    white-space: normal;
     font: var(--text-base-s-regular-font);
     color: var(--breadcrumb-text-color);
 
@@ -15,6 +17,7 @@
   }
 
   .title {
+    white-space: normal;
     cursor: default;
   }
 }

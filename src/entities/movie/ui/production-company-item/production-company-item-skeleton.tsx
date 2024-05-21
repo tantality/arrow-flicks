@@ -15,11 +15,15 @@ export const ProductionCompanyItemSkeleton = memo(
       <Group
         gap={"0.5rem"}
         align="center"
-        className={classNames(cls.productionCompanyItem, {}, [className])}
+        wrap="nowrap"
+        className={classNames(cls.productionCompanyItem, {}, [
+          className,
+          cls.skeleton,
+        ])}
         {...otherProps}
       >
         <Skeleton height={40} width={40} className={cls.logo} circle />
-        <Skeleton className={cls.companyName} height="16px" width="30%" />
+        <Skeleton className={cls.companyName} height="16px" />
       </Group>
     );
   }

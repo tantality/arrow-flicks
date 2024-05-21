@@ -22,6 +22,7 @@ export const ProductionCompanyItem = memo(
       <Group
         gap={"0.5rem"}
         align="center"
+        wrap="nowrap"
         className={classNames(cls.productionCompanyItem, {}, [className])}
         {...otherProps}
       >

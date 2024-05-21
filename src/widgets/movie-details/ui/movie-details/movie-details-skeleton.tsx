@@ -20,7 +20,7 @@ export const MovieDetailsSkeleton = memo((props: MovieDetailsSkeletonProps) => {
     >
       <Group gap="1rem">
         <Skeleton height="20px" width="70px" />
-        <Skeleton height="20px" width="20%" />
+        <Skeleton height="20px" width="50%" />
       </Group>
       <MovieRatingCardSkeleton size={MovieCardSize.L} />
       <MovieDescriptionSkeleton />
