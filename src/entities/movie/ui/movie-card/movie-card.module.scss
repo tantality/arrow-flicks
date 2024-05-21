@@ -1,11 +1,14 @@
 /* stylelint-disable media-feature-range-notation */
 .movieCard {
+  height: 100%;
   font-size: 1rem;
   color: var(--secondary-base-text-color);
 
   .container {
     --group-align: space-between !important;
     --group-wrap: nowrap !important;
+
+    flex-grow: 1;
     
     svg, img, :global(.mantine-Skeleton-root) {
       flex-shrink: 0;
