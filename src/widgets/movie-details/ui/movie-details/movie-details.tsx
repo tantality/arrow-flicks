@@ -1,5 +1,5 @@
 import { classNames } from "@/shared/lib/classNames/classNames";
-import { memo } from "react";
+import { memo, useEffect } from "react";
 import { Stack } from "@mantine/core";
 import { BreadCrumbs } from "@/shared/ui/bread-crumbs";
 import { MovieRatingCard, RatedMoviesProvider } from "@/features/movie-rating";
@@ -7,6 +7,12 @@ import { MovieDescription } from "@/entities/movie";
 import { MovieCardSize } from "@/entities/movie/ui/movie-card/movie-card";
 import { useMovieDetails } from "../../api/use-movie-details";
 import { findOfficialTrailer } from "../../lib/find-official-trailer";
+import { MovieDetailsSkeleton } from "./movie-details-skeleton";
+import { useRouter } from "next/navigation";
+import { AxiosError } from "axios";
+import { NOT_FOUND_STATUS } from "@/shared/const/api";
+import { AppRoutesByRouteName } from "@/shared/const/router";
+import { DefaultErrorScreen } from "../default-error-screen/default-error-screen";
 
 interface MovieDetailsProps {
   className?: string;
@@ -18,10 +24,28 @@ export const MovieDetails = memo((props: MovieDetailsProps) => {
 
   const movieIdAsNumber = Number(movieId);
   const isMovieIdValid = Boolean(movieIdAsNumber);
+  const router = useRouter();
 
-  const { data } = useMovieDetails(movieIdAsNumber, {
+  const { data, isLoading, error } = useMovieDetails(movieIdAsNumber, {
     enabled: isMovieIdValid,
   });
+
+  useEffect(() => {
+    const isError404 =
+      error instanceof AxiosError && error.status === NOT_FOUND_STATUS;
+
+    if ((!isMovieIdValid && movieId != undefined) || isError404) {
+      router.push(AppRoutesByRouteName.not_found);
+    }
+  }, [isMovieIdValid, error]);
+
+  if (isLoading) {
+    return <MovieDetailsSkeleton />;
+  }
+
+  if (error) {
+    return <DefaultErrorScreen />;
+  }
 
   if (!data) {
     return null;
@@ -40,7 +64,7 @@ export const MovieDetails = memo((props: MovieDetailsProps) => {
     runtime: data.runtime,
   };
 
-  const MovieDescriptionProps = {
+  const movieDescriptionProps = {
     production_companies: data.production_companies,
     overview: data.overview,
     trailer: findOfficialTrailer(data.videos.results),
@@ -60,7 +84,7 @@ export const MovieDetails = memo((props: MovieDetailsProps) => {
       >
         <BreadCrumbs items={breadcrumbs} />
         <MovieRatingCard size={MovieCardSize.L} {...movieCardProps} />
-        <MovieDescription {...MovieDescriptionProps} />
+        <MovieDescription {...movieDescriptionProps} />
       </Stack>
     </RatedMoviesProvider>
   );
