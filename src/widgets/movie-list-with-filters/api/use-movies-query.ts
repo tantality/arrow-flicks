@@ -6,7 +6,7 @@ import { usePaginationPage } from "@/app/providers/PaginationPageProvider";
 import { useMovieFilters } from "../hooks/use-movie-filters";
 import { AxiosError } from "axios";
 import { MovieFiltersErrors } from "../model/validations/movie-filters-schema";
-import { BadRequestTypes } from "@/shared/const/api";
+import { APT_URL, BadRequestTypes } from "@/shared/const/api";
 
 type UseQueryResultType<T, E = Error> = UseQueryResult<T, E>;
 
@@ -47,14 +47,14 @@ export const useMoviesQuery = (): UseQueryResultType<MoviesDto> => {
 };
 
 const getMovies = async (params: MoviesQueryParams): Promise<MoviesDto> => {
-  console.log('params', params)
-  const res = await axiosInstance.get<MoviesDto>("/api/proxy/discover/movie", {
+  console.log("params", params);
+  const res = await axiosInstance.get<MoviesDto>(APT_URL + "discover/movie", {
     params: {
       language: "en-US",
       ...params,
     },
   });
 
-  console.log('data', res.data)
+  console.log("data", res.data);
   return res.data;
 };
