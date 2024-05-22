@@ -8,11 +8,11 @@ import { MovieCardSize } from "@/entities/movie/ui/movie-card/movie-card";
 import { useMovieDetails } from "../../api/use-movie-details";
 import { findOfficialTrailer } from "../../lib/find-official-trailer";
 import { MovieDetailsSkeleton } from "./movie-details-skeleton";
-import { useRouter } from "next/navigation";
 import { AxiosError } from "axios";
 import { NOT_FOUND_STATUS } from "@/shared/const/api";
 import { AppRoutesByRouteName } from "@/shared/const/router";
 import { DefaultErrorScreen } from "../default-error-screen/default-error-screen";
+import { useRouter } from "next/router";
 
 interface MovieDetailsProps {
   className?: string;
@@ -30,20 +30,20 @@ export const MovieDetails = memo((props: MovieDetailsProps) => {
     enabled: isMovieIdValid,
   });
 
-  useEffect(() => {
-    const isError404 =
-      error instanceof AxiosError && error.status === NOT_FOUND_STATUS;
+  const isError404 =
+    error instanceof AxiosError && error.response?.status === NOT_FOUND_STATUS;
 
-    if ((!isMovieIdValid && movieId != undefined) || isError404) {
+  useEffect(() => {
+    if ((!isMovieIdValid && router.isReady) || isError404) {
       router.push(AppRoutesByRouteName.not_found);
     }
-  }, [isMovieIdValid, error]);
+  }, [isMovieIdValid, error, router.isReady]);
 
   if (isLoading) {
     return <MovieDetailsSkeleton />;
   }
 
-  if (error) {
+  if (error && !isError404) {
     return <DefaultErrorScreen />;
   }
 
