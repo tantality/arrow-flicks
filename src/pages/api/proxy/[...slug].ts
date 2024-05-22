@@ -5,6 +5,7 @@ import { validateMovieListQueryParams } from "./lib/validation/movies";
 import { BadRequestException } from "./errors/bad-request";
 
 const proxy = createProxyMiddleware<NextApiRequest, NextApiResponse>({
+  logger: console,
   target: APT_URL as string,
   pathRewrite: {
     "^/api/proxy/": "/",
@@ -28,7 +29,7 @@ export default async function handler(
     return new Promise((resolve, reject) => {
       proxy(req, res, (err: any) => {
         if (err) {
-          reject(err);
+          return reject(err);
         }
 
         return resolve(res);
