@@ -21,11 +21,12 @@ export const useMoviesQuery = (): UseQueryResultType<MoviesDto> => {
   );
   console.log("filters", data);
   console.log("page", page);
+  console.log("queryParams", queryParams);
 
   const queryRes = useQuery({
     queryKey: [
       "movies",
-      queryParams
+      queryParams,
       // data.sortBy,
       // data.releaseYear,
       // data.toRating,
