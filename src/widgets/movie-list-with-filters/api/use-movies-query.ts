@@ -16,9 +16,14 @@ export const useMoviesQuery = (): UseQueryResultType<MoviesDto> => {
   const { page } = usePaginationPage();
 
   const queryParams = useMemo(
-    () => mapFiltersToMoviesQueryParams(data, page),
-    [data, page]
+    () =>{
+      console.log('inside query  params' )
+
+      return mapFiltersToMoviesQueryParams(data, page);
+    },
+    [data.fromRating, data.genreId, data.toRating, data.releaseYear, data.sortBy, page]
   );
+  
   console.log("filters", data);
   console.log("page", page);
   console.log("queryParams", queryParams);
@@ -26,7 +31,13 @@ export const useMoviesQuery = (): UseQueryResultType<MoviesDto> => {
   const queryRes = useQuery({
     queryKey: [
       "movies",
-      queryParams,
+      queryParams.page,
+      queryParams.primary_release_year,
+      queryParams["vote_average.gte"],
+      queryParams["vote_average.lte"],
+      queryParams.sort_by,
+      queryParams.with_genres
+
       // data.sortBy,
       // data.releaseYear,
       // data.toRating,
