@@ -1,4 +1,4 @@
-import { UseQueryResult, useQuery } from "@tanstack/react-query";
+import { QueryCache, UseQueryResult, useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "@/shared/api/axios";
 import { MoviesDto, MoviesQueryParams } from "../model/types/movies";
 import { mapFiltersToMoviesQueryParams } from "../lib/map-filters-to-movies-query-params";
@@ -15,15 +15,18 @@ export const useMoviesQuery = (): UseQueryResultType<MoviesDto> => {
   const { data, areThereValidationErrors, setErrors } = useMovieFilters();
   const { page } = usePaginationPage();
 
-  const queryParams = useMemo(
-    () =>{
-      console.log('inside query  params' )
+  const queryParams = useMemo(() => {
+    console.log("inside query  params");
+    return mapFiltersToMoviesQueryParams(data, page);
+  }, [
+    data.fromRating,
+    data.genreId,
+    data.toRating,
+    data.releaseYear,
+    data.sortBy,
+    page,
+  ]);
 
-      return mapFiltersToMoviesQueryParams(data, page);
-    },
-    [data.fromRating, data.genreId, data.toRating, data.releaseYear, data.sortBy, page]
-  );
-  
   console.log("filters", data);
   console.log("page", page);
   console.log("queryParams", queryParams);
@@ -31,19 +34,8 @@ export const useMoviesQuery = (): UseQueryResultType<MoviesDto> => {
   const queryRes = useQuery({
     queryKey: [
       "movies",
-      queryParams.page,
-      queryParams.primary_release_year,
-      queryParams["vote_average.gte"],
-      queryParams["vote_average.lte"],
-      queryParams.sort_by,
-      queryParams.with_genres
-
-      // data.sortBy,
-      // data.releaseYear,
-      // data.toRating,
-      // data.fromRating,
-      // data.genreId,
-      // page,
+      data,
+      page
     ],
     staleTime: 0,
     queryFn: () => getMovies(queryParams),
