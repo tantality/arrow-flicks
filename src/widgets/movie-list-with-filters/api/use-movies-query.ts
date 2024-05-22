@@ -15,6 +15,8 @@ export const useMoviesQuery = (): UseQueryResultType<MoviesDto> => {
   const { page } = usePaginationPage();
 
   const queryParams = mapFiltersToMoviesQueryParams(data, page);
+  console.log('filters',data);
+  console.log('page',page);
 
   const queryRes = useQuery({
     queryKey: [
@@ -27,7 +29,6 @@ export const useMoviesQuery = (): UseQueryResultType<MoviesDto> => {
       page,
     ],
     queryFn: () => getMovies(queryParams),
-    staleTime: Infinity,
     enabled: !areThereValidationErrors,
   });
 
