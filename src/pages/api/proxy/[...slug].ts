@@ -34,7 +34,7 @@ export default async function handler(
     }
 
     return new Promise((resolve, reject) => {
-      proxy(req, res, (err: any) => {
+      return proxy(req, res, (err: any) => {
         if (err) {
           reject(err);
         }
