@@ -28,10 +28,11 @@ export const useMoviesQuery = (): UseQueryResultType<MoviesDto> => {
       data.genreId,
       page,
     ],
+    staleTime: 0,
     queryFn: () => getMovies(queryParams),
     enabled: !areThereValidationErrors,
   });
-
+  
   if (areThereValidationErrors) {
     return { data: undefined } as UseQueryResultType<MoviesDto>;
   }
