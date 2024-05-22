@@ -7,6 +7,7 @@ import { useMovieFilters } from "../hooks/use-movie-filters";
 import { AxiosError } from "axios";
 import { MovieFiltersErrors } from "../model/validations/movie-filters-schema";
 import { APT_URL, BadRequestTypes } from "@/shared/const/api";
+import { useMemo } from "react";
 
 type UseQueryResultType<T, E = Error> = UseQueryResult<T, E>;
 
@@ -14,25 +15,29 @@ export const useMoviesQuery = (): UseQueryResultType<MoviesDto> => {
   const { data, areThereValidationErrors, setErrors } = useMovieFilters();
   const { page } = usePaginationPage();
 
-  const queryParams = mapFiltersToMoviesQueryParams(data, page);
-  console.log('filters',data);
-  console.log('page',page);
+  const queryParams = useMemo(
+    () => mapFiltersToMoviesQueryParams(data, page),
+    [data, page]
+  );
+  console.log("filters", data);
+  console.log("page", page);
 
   const queryRes = useQuery({
     queryKey: [
       "movies",
-      data.sortBy,
-      data.releaseYear,
-      data.toRating,
-      data.fromRating,
-      data.genreId,
-      page,
+      queryParams
+      // data.sortBy,
+      // data.releaseYear,
+      // data.toRating,
+      // data.fromRating,
+      // data.genreId,
+      // page,
     ],
     staleTime: 0,
     queryFn: () => getMovies(queryParams),
     enabled: !areThereValidationErrors,
   });
-  
+
   if (areThereValidationErrors) {
     return { data: undefined } as UseQueryResultType<MoviesDto>;
   }
