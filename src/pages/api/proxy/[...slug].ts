@@ -4,6 +4,13 @@ import { API_KEY, APT_URL } from "@/shared/const/api";
 import { validateMovieListQueryParams } from "./lib/validation/movies";
 import { BadRequestException } from "./errors/bad-request";
 
+export const config = {
+  api: {
+    externalResolver: true,
+    bodyParser: false,
+  },
+};
+
 const proxy = createProxyMiddleware<NextApiRequest, NextApiResponse>({
   logger: console,
   target: APT_URL as string,
@@ -29,10 +36,10 @@ export default async function handler(
     return new Promise((resolve, reject) => {
       proxy(req, res, (err: any) => {
         if (err) {
-          return reject(err);
+          reject(err);
         }
 
-        return resolve(res);
+        resolve(res);
       });
     });
   } catch (e) {
