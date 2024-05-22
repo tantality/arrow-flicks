@@ -28,19 +28,16 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
+    console.log('handler')
     const isRequestToGetMovieList = req.url?.includes("discover/movie");
     if (isRequestToGetMovieList) {
       validateMovieListQueryParams(req);
     }
 
-    return new Promise((resolve, reject) => {
-      return proxy(req, res, (err: any) => {
-        if (err) {
-          reject(err);
-        }
-
-        resolve(res);
-      });
+    return proxy(req, res, (result: unknown) => {
+      if (result instanceof Error) {
+        throw result;
+      }
     });
   } catch (e) {
     if (e instanceof BadRequestException) {
