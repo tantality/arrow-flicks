@@ -28,7 +28,9 @@ export const BreadCrumbs = memo((props: BreadCrumbsProps) => {
         {item.title}
       </Link>
     ) : (
-      <div className={cls.title}>{item.title}</div>
+      <div className={cls.title} key={index}>
+        {item.title}
+      </div>
     );
   });
 
