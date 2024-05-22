@@ -1,5 +1,9 @@
 @import "reset";
 
+body {
+  overflow-y: scroll;
+}
+
 .app {
   color: var(--accent-base-text-color);
   min-height: 100vh;
@@ -20,14 +24,14 @@
   }
 }
 
-.mantine-ScrollArea-viewport{
+.mantine-ScrollArea-viewport {
   padding-right: 0;
 }
 
 .mantine-Select-option {
   padding: 8px;
   font: var(--text-base-s-regular-font);
-  
+
   &[aria-selected="true"] {
     padding-left: 10px;
     background-color: var(--active-shell-bg-color);
@@ -38,6 +42,6 @@
   }
 }
 
-.mantine-Breadcrumbs-root{
+.mantine-Breadcrumbs-root {
   flex-wrap: wrap;
 }
