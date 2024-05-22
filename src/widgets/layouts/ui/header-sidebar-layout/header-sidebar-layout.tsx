@@ -1,8 +1,8 @@
 import { classNames } from "@/shared/lib/classNames/classNames";
 import cls from "./header-sidebar-layout.module.scss";
 import { ReactElement, ReactNode, cloneElement, memo } from "react";
-import { useMediaQuery } from "@mantine/hooks";
 import { Container } from "@mantine/core";
+import { useWindowSize } from "@/shared/hooks/use-window-size";
 
 interface HeaderSidebarLayoutProps {
   className?: string;
@@ -22,17 +22,19 @@ export const HeaderSidebarLayout = memo((props: HeaderSidebarLayoutProps) => {
     ...otherProps
   } = props;
 
-  const matches = useMediaQuery("(max-width: 1200px)");
+  const [width] = useWindowSize();
 
   const clonedSidebar = cloneElement(sidebar, { className: cls.layoutSidebar });
   const clonedHeader = cloneElement(header, { className: cls.layoutHeader });
+
+  const layoutPart = width > 1200 ? clonedSidebar : clonedHeader;
 
   return (
     <div
       className={classNames(cls.headerSidebarLayout, {}, [className])}
       {...otherProps}
     >
-      {matches ? clonedHeader : clonedSidebar}
+      {layoutPart}
       <div className={cls.layoutPage}>
         <Container className={cls.pageContainer} size={maxWidth}>
           {content}
