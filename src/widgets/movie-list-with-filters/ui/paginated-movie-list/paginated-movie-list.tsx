@@ -1,6 +1,6 @@
 import { classNames } from "@/shared/lib/classNames/classNames";
 import cls from "./paginated-movie-list.module.scss";
-import { memo } from "react";
+import { memo, useContext } from "react";
 import { Stack } from "@mantine/core";
 import { useMovieFilters } from "../../hooks/use-movie-filters";
 import { useMoviesQuery } from "../../api/use-movies-query";
@@ -11,6 +11,7 @@ import { NoFilteredMoviesScreen } from "../no-filtered-movies-screen/no-filtered
 import { MovieList } from "../movie-list/movie-list";
 import { useScrollToTopOnPageChange } from "@/shared/hooks/use-scroll-to-top-on-page-change";
 import { DefaultErrorScreen } from "@/features/message-screen";
+import { queryClientContext } from "@/app/providers/ReactQueryProvider/ui/ReactQueryProvider";
 
 interface PaginatedMovieListProps {
   className?: string;
@@ -20,8 +21,14 @@ export const PaginatedMovieList = memo((props: PaginatedMovieListProps) => {
   const { className, ...otherProps } = props;
 
   const { page, setPage } = usePaginationPage();
-  const { data, isLoading, error } = useMoviesQuery();
+  const { data, isLoading, isSuccess, error } = useMoviesQuery();
   const { areThereValidationErrors } = useMovieFilters();
+  const queryClient = useContext(queryClientContext);
+
+  if (isSuccess) {
+    console.log("isSuccess");
+    queryClient.invalidateQueries();
+  }
 
   useScrollToTopOnPageChange(page);
 

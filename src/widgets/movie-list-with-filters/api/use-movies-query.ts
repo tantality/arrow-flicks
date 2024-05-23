@@ -13,9 +13,6 @@ import { queryClientContext } from "@/app/providers/ReactQueryProvider/ui/ReactQ
 type UseQueryResultType<T, E = Error> = UseQueryResult<T, E>;
 
 export const useMoviesQuery = (): UseQueryResultType<MoviesDto> => {
-  const queryClient = useContext(queryClientContext);
-  queryClient.invalidateQueries();
-
   const { data, areThereValidationErrors, setErrors } = useMovieFilters();
   const { page } = usePaginationPage();
 
