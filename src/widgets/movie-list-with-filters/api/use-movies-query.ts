@@ -50,7 +50,7 @@ export const useMoviesQuery = (): UseQueryResultType<MoviesDto> => {
 };
 
 const getMovies = async (params: MoviesQueryParams): Promise<MoviesDto> => {
-  const res = await axiosInstance.get<MoviesDto>("/api/proxys/discover/movie", {
+  const res = await axiosInstance.get<MoviesDto>("/api/proxy/discover/movie", {
     params: {
       language: "en-US",
       ...params,
