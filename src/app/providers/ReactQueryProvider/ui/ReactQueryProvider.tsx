@@ -1,15 +1,20 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactNode, createContext, useContext } from "react";
+import { ReactNode } from "react";
+import { determineIfToRetry } from "../lib/determine-if-to-retry";
 
-export const queryClientContext = createContext<QueryClient>(new QueryClient());
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: determineIfToRetry,
+    },
+  },
+});
 
 interface ReactQueryProviderProps {
   children: ReactNode;
 }
 
 const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
-  const queryClient = useContext(queryClientContext);
-
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
