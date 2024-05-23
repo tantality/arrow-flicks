@@ -33,13 +33,6 @@ export const MovieDetails = memo((props: MovieDetailsProps) => {
   const isError404 =
     error instanceof AxiosError && error.response?.status === NOT_FOUND_STATUS;
 
-  console.log("error", error);
-  console.log("error inst", error instanceof AxiosError);
-  if (error instanceof AxiosError) {
-    console.log("error status", error.response?.status);
-  }
-  console.log("isError404", isError404);
-
   useEffect(() => {
     if (!isMovieIdValid && router.isReady) {
       router.push(AppRoutesByRouteName.not_found);
@@ -51,8 +44,8 @@ export const MovieDetails = memo((props: MovieDetailsProps) => {
   }
 
   if (isError404) {
-    console.log("404");
     router.push(AppRoutesByRouteName.not_found);
+    return;
   }
 
   if (error) {
