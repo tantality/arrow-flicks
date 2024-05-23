@@ -7,11 +7,15 @@ import { useMovieFilters } from "../hooks/use-movie-filters";
 import { AxiosError } from "axios";
 import { MovieFiltersErrors } from "../model/validations/movie-filters-schema";
 import { APT_URL, BadRequestTypes } from "@/shared/const/api";
-import { useMemo } from "react";
+import { useContext, useEffect, useMemo } from "react";
+import { queryClientContext } from "@/app/providers/ReactQueryProvider/ui/ReactQueryProvider";
 
 type UseQueryResultType<T, E = Error> = UseQueryResult<T, E>;
 
 export const useMoviesQuery = (): UseQueryResultType<MoviesDto> => {
+  const queryClient = useContext(queryClientContext);
+  queryClient.invalidateQueries();
+
   const { data, areThereValidationErrors, setErrors } = useMovieFilters();
   const { page } = usePaginationPage();
 
@@ -31,14 +35,13 @@ export const useMoviesQuery = (): UseQueryResultType<MoviesDto> => {
   console.log("page", page);
   console.log("queryParams", queryParams);
 
+  // queryClient.invalidateQueries({ queryKey: ["movies"] });
+
+
   const queryRes = useQuery({
-    queryKey: [
-      "movies",
-      data,
-      page
-    ],
+    queryKey: ["movies", data, page],
     staleTime: 0,
-    queryFn: () => getMovies(queryParams),
+    queryFn: ()=>getMovies(queryParams),
     enabled: !areThereValidationErrors,
   });
 
@@ -59,7 +62,7 @@ export const useMoviesQuery = (): UseQueryResultType<MoviesDto> => {
 
 const getMovies = async (params: MoviesQueryParams): Promise<MoviesDto> => {
   console.log("params", params);
-  const res = await axiosInstance.get<MoviesDto>(APT_URL+"discover/movie", {
+  const res = await axiosInstance.get<MoviesDto>("/api/proxy/discover/movie", {
     params: {
       language: "en-US",
       ...params,
