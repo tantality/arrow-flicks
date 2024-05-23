@@ -15,6 +15,8 @@ type UseQueryResultType<T, E = Error> = UseQueryResult<T, E>;
 export const useMoviesQuery = (): UseQueryResultType<MoviesDto> => {
   const { data, areThereValidationErrors, setErrors } = useMovieFilters();
   const { page } = usePaginationPage();
+  const queryClient = useContext(queryClientContext);
+  queryClient.invalidateQueries();
 
   const queryParams = useMemo(() => {
     console.log("inside query  params");

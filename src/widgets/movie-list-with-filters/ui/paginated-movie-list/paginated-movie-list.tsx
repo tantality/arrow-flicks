@@ -23,12 +23,6 @@ export const PaginatedMovieList = memo((props: PaginatedMovieListProps) => {
   const { page, setPage } = usePaginationPage();
   const { data, isLoading, isSuccess, error } = useMoviesQuery();
   const { areThereValidationErrors } = useMovieFilters();
-  const queryClient = useContext(queryClientContext);
-
-  if (isSuccess) {
-    console.log("isSuccess");
-    queryClient.invalidateQueries();
-  }
 
   useScrollToTopOnPageChange(page);
 
