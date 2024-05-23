@@ -23,7 +23,7 @@ function mapToFormattedMovieDescriptionItems(
         name: "Duration",
         value: toHoursAndMinutes(runtime),
       },
-      {
+      dayjs(release_date).isValid() && {
         name: "Premiere",
         value: dayjs(release_date).format("MMMM D, YYYY"),
       },
