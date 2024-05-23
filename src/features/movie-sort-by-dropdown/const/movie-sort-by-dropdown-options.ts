@@ -16,7 +16,7 @@ export enum MovieSortByValues{
 export const movieSortByDropdownOptions: DropdownOption[] = [
   {
     value: MovieSortByValues.PopularityDesc,
-    label: "Most popular",
+    label: "Most Popular",
   },
   {
     value: MovieSortByValues.PopularityAsc,
