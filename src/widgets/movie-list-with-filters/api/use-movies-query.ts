@@ -29,7 +29,7 @@ export const useMoviesQuery = (): UseQueryResultType<MoviesDto> => {
 
   const queryRes = useQuery({
     queryKey: ["movies", data, page],
-    staleTime: 0,
+    staleTime: Infinity,
     queryFn: () => getMovies(queryParams),
     enabled: !areThereValidationErrors,
   });
