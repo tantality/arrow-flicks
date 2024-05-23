@@ -15,8 +15,6 @@ type UseQueryResultType<T, E = Error> = UseQueryResult<T, E>;
 export const useMoviesQuery = (): UseQueryResultType<MoviesDto> => {
   const { data, areThereValidationErrors, setErrors } = useMovieFilters();
   const { page } = usePaginationPage();
-  const queryClient = useContext(queryClientContext);
-  queryClient.invalidateQueries();
 
   const queryParams = useMemo(() => {
     console.log("inside query  params");
@@ -61,7 +59,7 @@ export const useMoviesQuery = (): UseQueryResultType<MoviesDto> => {
 
 const getMovies = async (params: MoviesQueryParams): Promise<MoviesDto> => {
   console.log("params", params);
-  const res = await axiosInstance.get<MoviesDto>("/api/proxy/discover/movie", {
+  const res = await axiosInstance.get<MoviesDto>("/api/proxys/discover/movie", {
     params: {
       language: "en-US",
       ...params,
