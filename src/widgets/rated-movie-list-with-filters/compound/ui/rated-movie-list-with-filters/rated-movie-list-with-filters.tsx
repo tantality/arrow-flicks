@@ -21,6 +21,10 @@ export const RatedMovieListWithFilters = memo(
       return <NoRatedMoviesScreen />;
     }
 
+    if (!isInit) {
+      return null;
+    }
+
     return (
       <Stack
         gap={"2.5rem"}
