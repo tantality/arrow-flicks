@@ -14,6 +14,8 @@ interface RateMovieModalProps extends ModalProps {
   movie: RatedMovie;
 }
 
+const closeButtonProps = { iconSize: "16px", size: "sm" };
+
 export const RateMovieModal = memo((props: RateMovieModalProps) => {
   const { className, onClose, movie, ...otherProps } = props;
   const dispatch = useRatedMoviesDispatch();
@@ -41,6 +43,7 @@ export const RateMovieModal = memo((props: RateMovieModalProps) => {
       title="Your rating"
       size="auto"
       centered
+      closeButtonProps={closeButtonProps}
       {...otherProps}
     >
       <Stack className={cls.modalBody} gap="1rem">

@@ -10,7 +10,7 @@ import { HeaderSidebarLayout } from "@/widgets/layouts";
 
 const Movies = () => {
   const content = (
-    <Stack gap={"2.5rem"}>
+    <Stack gap={"2.5rem"} style={{ paddingBottom: "42px" }}>
       <Title order={1}>Movies</Title>
       <Stack gap={"1.5rem"}>
         <MovieFilters />
